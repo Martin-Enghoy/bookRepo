@@ -111,7 +111,6 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="#">Login</a></li>
 							<li class="current"><a href="#">Latest Post</a></li>
 							<li><a href="#">Archives</a></li>
 							<li><a href="#">About Me</a></li>
@@ -119,6 +118,16 @@
 						</ul>
 					</nav>
 
+
+				<section class ="box text-style1">
+					<div class ="inner">
+						<form method="post" action="lib-home.php">
+							<h2>Login</h2>
+							<input type="text" class="text" name="Username" placeholder="Username"/>
+						</form> 
+					</div>
+				</section>
+				
 				<!-- Search -->
 					<section class="box search">
 						<form method="post" action="#">
