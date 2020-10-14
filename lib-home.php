@@ -13,9 +13,94 @@
 	</head>
 	<body class="is-preload">
 	
+	<!-- Back End
+		1. Load bookRepo database
+		2. Get user and pw from Admin
+		3. Get BookDetails
+		4. Check if details exist
+		5. Redirect to book pages when clicked.
+	-->
+	
 	<?php
 		
+		//Gets proper input format
+		function formatdata($input){
+			return htmlspecialchars(stripslashes(trim($input)));
+		}
 		
+		//Connection to SQL
+		$sqlconnect = mysqli_connect('localhost','root','');
+		if(!$sqlconnect){
+			die();
+		}
+		
+		//Database init
+		$selectDB = mysqli_select_db($sqlconnect,'bookrepo');
+		if(!$selectDB){
+			die("Database not connected." . mysqli_error());
+		}
+		
+		//Get username-pw 
+		$records = array(array("user"=> null, "pass"=> null,));
+		$recordsDB = mysqli_query($sqlconnect, "select * from admin");
+		$count = 0;
+		
+		while($arr = mysqli_fetch_array($recordsDB)){
+			$records[$count]["user"] = $arr['UserName'];
+			$records[$count]["pass"] = $arr['PassWord'];
+			$count++;
+		}
+		
+		//init variables
+		$username = $password = "";
+		$userErr = $passErr = "";
+		
+		//Verifs
+		$error = 0;
+		$userVer = 0;
+		$passVer = 0;
+		
+		//Error check and catch
+		if($_SERVER["REQUEST_METHOD"]=="POST"){
+			//Input Check
+			if(empty($_POST["username"])){
+				$userErr = "Please input your Username!";
+				$error = 1;
+			}	
+			else {
+				//Check in admin 
+				$username = formatdata($_POST["username"]);
+				for($userid = 0; $userid < $count; $userid++){
+					if($username == $records[$userid]["user"]{
+						$userVer = 1;
+						break;
+					}
+				}
+			}
+			
+			//Error message for UserName not found.
+			if($userVer == 0 && !empty($_POST["username"])){
+				$userErr = "Username does not exist!";
+			}
+			
+			//PW Check
+			if(empty($_POST["password"])){
+				$passErr = "Please input a Password!";
+			} 
+			else {
+				$password = formatdata($_POST["password"]);
+				if($userVer == 1){
+					//If Found
+					if($password == $records[$idNum]["pass"]){
+						$passVer = 1;
+					}
+					else {
+						$passErr = "Password does not match!";
+						echo "<script>alert('Password does not match!')</script>";
+					}
+				}
+			}
+		}
 		
 	?>
 
