@@ -2190,7 +2190,7 @@ input, select, textarea {
 			display: block;
 			border-radius: 0.1em;
 			outline: 0;
-			background-color: rgba(0,255,255,0.1);
+			background-color: rgba(0,0,0,0.1);
 		}
 
 /* Sidebar */

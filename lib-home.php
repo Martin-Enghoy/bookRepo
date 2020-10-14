@@ -135,14 +135,7 @@
 							</div>
 							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
 							<p>
-								<strong>Hello!</strong> You're looking at <strong>Striped</strong>, a fully responsive HTML5 site template designed by <a href="http://twitter.com/ajlkn">AJ</a>
-								for <a href="http://html5up.net">HTML5 UP</a> It features a clean, minimalistic design, styling for all basic page elements (including blockquotes, tables and lists), a
-								repositionable sidebar (left or right), and HTML5/CSS3 code designed for quick and easy customization (see code comments for details).
-							</p>
-							<p>
-								Striped is released for free under the <a href="http://html5up.net/license">Creative Commons Attribution license</a> so feel free to use it for personal projects
-								or even commercial ones &ndash; just be sure to credit <a href="http://html5up.net">HTML5 UP</a> for the design. If you like what you see here, be sure to check out
-								<a href="http://html5up.net">HTML5 UP</a> for more cool designs or follow me on <a href="http://twitter.com/ajlkn">Twitter</a> for new releases and updates.
+								<strong>Book's Synopsis</strong> There's something to be put here regarding the book's contents. This space is reserved for the synopsis. This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.
 							</p>
 						</article>
 
@@ -153,7 +146,7 @@
 								<p>Author and Date</p>
 							</header>
 							<div class="info">
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">8</span><span class="year">, 2014</span></span>
+								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
 								<ul class="stats">
 									<li><a href="#" class="icon fa-comment">16</a></li>
 									<li><a href="#" class="icon fa-heart">32</a></li>
