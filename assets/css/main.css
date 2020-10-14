@@ -2185,6 +2185,13 @@ input, select, textarea {
 			background-color: rgba(255, 255, 255, 0.1);
 			color: #fff;
 		}
+		
+		#nav li.sub a {
+			display: block;
+			border-radius: 0.1em;
+			outline: 0;
+			background-color: rgba(0,255,255,0.1);
+		}
 
 /* Sidebar */
 

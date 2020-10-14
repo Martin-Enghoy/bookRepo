@@ -47,7 +47,7 @@
 		
 		while($arr = mysqli_fetch_array($recordsDB)){
 			$records[$count]["user"] = $arr['UserName'];
-			$records[$count]["pass"] = $arr['PassWord'];
+			$records[$count]["pass"] = $arr['Password'];
 			$count++;
 		}
 		
@@ -71,7 +71,7 @@
 				//Check in admin 
 				$username = formatdata($_POST["username"]);
 				for($userid = 0; $userid < $count; $userid++){
-					if($username == $records[$userid]["user"]{
+					if($username == $records[$userid]["user"]){
 						$userVer = 1;
 						break;
 					}
@@ -197,18 +197,27 @@
 					<nav id="nav">
 						<ul>
 							<li class="current"><a href="#">Latest Post</a></li>
-							<li><a href="#">Archives</a></li>
-							<li><a href="#">About Me</a></li>
-							<li><a href="#">Contact Me</a></li>
+							<li><a href="#">Book Repo</a></li>
+							<ul>
+								<li class="sub"><a href="#">Add Book</a></li>
+								<li class="sub"><a href="#">Edit Book Details </a></li>
+								<li class="sub"><a href="#">Remove Book</a></li>
+								<li class="sub"><a href="#"></a></li>
+							</ul>
+							<li><a href="#">About RepoHub</a></li>
 						</ul>
 					</nav>
 
-
+				<!-- Login -->
 				<section class ="box text-style1">
 					<div class ="inner">
-						<form method="post" action="lib-home.php">
-							<h2>Login</h2>
+						<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+							<p class="error"><?php echo $userErr; ?></p>
 							<input type="text" class="text" name="Username" placeholder="Username"/>
+							<p class="error"><?php echo $passErr; ?></p>
+							<input type="password" class="text" name="Password" placeholder="Password"/>
+							<br>
+							<input type="submit" value="Login"/>
 						</form> 
 					</div>
 				</section>
