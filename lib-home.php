@@ -26,8 +26,8 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#">RepoHub: Online Book Repository</a></h2>
-								<p>Feel free to look up books / material that you like!</p>
+								<h2><a href="#">--Book Title #1--</a></h2>
+								<p>Author and Date</p>
 							</header>
 							<div class="info">
 								<!--
@@ -64,8 +64,8 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#">Lorem ipsum dolor sit amet</a></h2>
-								<p>Feugiat interdum sed commodo ipsum consequat dolor nullam metus</p>
+								<h2><a href="#">--Book Title #2--</a></h2>
+								<p>Author and Date</p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">8</span><span class="year">, 2014</span></span>
@@ -106,7 +106,7 @@
 			<div id="sidebar">
 
 				<!-- Logo -->
-					<h1 id="logo"><a href="#">STRIPED</a></h1>
+					<h1 id="logo"><a href="#">RepoHub</a></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
