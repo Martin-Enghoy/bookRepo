@@ -50,15 +50,10 @@
 		$bookRecords = array("title"=> null, "isbn"=> null, "abstract"=> null, "series"=> null, "pubhouse"=> null, 
 		*/
 		
-		//session init
-		session_start();
-		
 		//Putting users in array
 		while($arr = mysqli_fetch_array($recordsDB)){
 			$records[$count]["user"] = $arr['UserName'];
-			$_SESSION[$count]['user'] = $arr['UserName'];
 			$records[$count]["pass"] = $arr['Password'];
-			$_SESSION[$count]['pass'] = $arr['Password'];
 			$count++;
 		}
 		
