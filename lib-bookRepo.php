@@ -53,7 +53,9 @@
 		//Putting users in array
 		while($arr = mysqli_fetch_array($recordsDB)){
 			$records[$count]["user"] = $arr['UserName'];
+			$_SESSION['user'][$count] = $arr['UserName'];
 			$records[$count]["pass"] = $arr['Password'];
+			$_SESSION['pass'][$count] = $arr['Password'];
 			$count++;
 		}
 		
