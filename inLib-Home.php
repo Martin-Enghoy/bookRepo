@@ -217,8 +217,8 @@
 				<!-- Login -->
 				<section class ="box text-style1">
 					<div class ="inner">
-						<h2>Logged in as: </h2>
-						<p><?php echo $_SESSION['userLog'];?></p>
+						<p>Welcome to RepoHub!</p>
+						<h2><?php echo $_SESSION['userLog'];?></h2>
 					</div>
 				</section>
 				

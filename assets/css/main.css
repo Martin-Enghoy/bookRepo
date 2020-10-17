@@ -1742,7 +1742,8 @@ input, select, textarea {
 
 		.image img {
 			display: block;
-			width: 100%;
+			max-width: 100%;
+			max-height: 100%;
 		}
 
 		.image.fit {
@@ -1754,6 +1755,10 @@ input, select, textarea {
 			display: block;
 			width: 100%;
 			margin: 0 0 2em 0;
+		}
+		
+		.box {
+			height: 200px;
 		}
 
 		.image.left {

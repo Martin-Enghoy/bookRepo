@@ -45,6 +45,10 @@
 		$recordsDB = mysqli_query($sqlconnect, "select * from admin"); //fetching data from bookrepo db
 		$count = 0;
 		
+		//Get books
+		$booksDB = mysqli_query($sqlconnect, "select * from books");
+		$bookCount = 0;
+		
 		//Get books 
 		/*
 		$bookRecords = array("title"=> null, "isbn"=> null, "abstract"=> null, "series"=> null, "pubhouse"=> null, 
@@ -62,9 +66,27 @@
 			$count++;
 		}
 		
+		//Putting book details into array
+		while($arrB = mysqli_fetch_array($booksDB)){
+			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
+			$_SESSION['title'][$bookCount] = $arrB['Title'];
+			$_SESSION['isbn'][$bookCount] = $arrB['ISBN'];
+			$_SESSION['cover'][$bookCount] = $arrB['Cover'];
+			$_SESSION['abstract'][$bookCount] = $arrB['Abstract'];
+			$_SESSION['series'][$bookCount] = $arrB['Series'];
+			$_SESSION['pubhouse'][$bookCount] = $arrB['PubHouse'];
+			$_SESSION['pubdate'][$bookCount] = $arrB['PubDate'];
+			$_SESSION['country'][$bookCount] = $arrB['Country'];
+			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
+			$bookCount++;
+		}
+		
 		//init variables
 		$username = $password = "";
 		$userErr = $passErr = "";
+		
+		//Page variables
+		$pageBookIndex = 0;
 		
 		//Verifs
 		$error = 0;
@@ -113,6 +135,9 @@
 					}
 				}
 			}
+			if($userVer == 1 && $passVer == 1){
+				header("Location: inLib-Home.php");
+			}	
 		}
 		
 	?>
@@ -124,8 +149,9 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#">--Book Title #1--</a></h2>
-								<p>Author and Date</p>
+								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
+								
+								<p>Author | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
 							</header>
 							<div class="info">
 								<!--
@@ -146,10 +172,15 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<div class="image featured">
+							<a href="#" class="image featured"><img src="images/Philosopher's Stone.jpg" alt="" /></a>
+							</div>
 							<p>
-								<strong>Book's Synopsis</strong> There's something to be put here regarding the book's contents. This space is reserved for the synopsis. This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.
+								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
 							</p>
+							
+							<?php $pageBookIndex++;?>
+							<!-- <p><?php //echo $pageBookIndex;?></p> -->
 						</article>
 
 					<!-- Post -->
