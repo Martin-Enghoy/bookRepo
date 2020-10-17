@@ -45,9 +45,11 @@
 		$recordsDB = mysqli_query($sqlconnect, "select * from admin"); //fetching data from bookrepo db
 		$count = 0;
 		
+		/*
 		//Get books
 		$booksDB = mysqli_query($sqlconnect, "select * from books order by dateposted desc limit 1");
 		$bookCount = 0;
+		*/
 		
 		//Get books 
 		/*
@@ -66,6 +68,7 @@
 			$count++;
 		}
 		
+		/*
 		//Putting book details into array
 		while($arrB = mysqli_fetch_array($booksDB)){
 			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
@@ -81,17 +84,14 @@
 			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
 			$bookCount++;
 		}
-		
-		//init of bookCount to pass
-		$_SESSION['bookcount'] = $bookCount;
+		*/
 		
 		//init variables
 		$username = $password = "";
 		$userErr = $passErr = "";
-		$addIndex = 0;
 		
 		//Page variables
-		$pageBookIndex = $addIndex + 0;
+		//$pageBookIndex = 0;
 		
 		//Verifs
 		$error = 0;
@@ -141,7 +141,7 @@
 				}
 			}
 			if($userVer == 1 && $passVer == 1){
-				header("Location: inLib-Home.php");
+				header("Location: inLib-ViewBook.php");
 			}	
 		}
 		
@@ -177,7 +177,9 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
+							<div class="box">
 							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>"  alt="" /></a>
+							</div>
 							<p>
 								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
 							</p>
@@ -212,7 +214,7 @@
 							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
 								<a href="#" class="active">1</a>
-								<a href="#" action="<?php $addIndex = 'page2';?>">2</a>
+								<a href="#">2</a>
 								<a href="#">3</a>
 								<a href="#">4</a>
 								<span>&hellip;</span>
@@ -234,9 +236,9 @@
 					<nav id="nav">
 						<ul>
 							<li class="current"><a href="#">Latest Post</a></li>
-							<li><a href="lib-bookRepo.php">Book Repo</a></li>
-							<li><a href="lib-AddBook.php">Add Book</a></li>
-							<li><a href="lib-AboutRepoHub.php">About RepoHub</a></li>
+							<li><a href="#">Book Repo</a></li>
+							<li><a href="#">Add Book</a></li>
+							<li><a href="#">About RepoHub</a></li>
 						</ul>
 					</nav>
 
