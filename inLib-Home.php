@@ -50,14 +50,19 @@
 		$bookRecords = array("title"=> null, "isbn"=> null, "abstract"=> null, "series"=> null, "pubhouse"=> null, 
 		*/
 		
+		//session init
+		session_start();
+		
+		/*
 		//Putting users in array
 		while($arr = mysqli_fetch_array($recordsDB)){
-			$records[$count]["user"] = $arr['UserName'];
-			//$_SESSION['user'][$count] = $arr['UserName'];
-			$records[$count]["pass"] = $arr['Password'];
-			//$_SESSION['pass'][$count] = $arr['Password'];
+			//$records[$count]["user"] = $arr['UserName'];
+			$_SESSION['user'][$count] = $arr['UserName'];
+			//$records[$count]["pass"] = $arr['Password'];
+			$_SESSION['pass'][$count] = $arr['Password'];
 			$count++;
 		}
+		
 		
 		//init variables
 		$username = $password = "";
@@ -81,7 +86,6 @@
 				for($userid = 0; $userid < $count; $userid++){
 					if($username == $_SESSION['user'][$userid]){
 						$userVer = 1;
-						$_SESSION['userLog'] = $_SESSION['user'][$userid];
 						break;
 					}
 				}
@@ -102,7 +106,6 @@
 					//If Found
 					if($password == $_SESSION['pass'][$userid]){
 						$passVer = 1;
-						$_SESSION['userPass'] = $_SESSION['pass'][$userid];
 					}
 					else {
 						$passErr = "Password does not match!";
@@ -111,7 +114,7 @@
 				}
 			}
 		}
-		
+		*/
 	?>
 
 		<!-- Content -->
@@ -214,20 +217,8 @@
 				<!-- Login -->
 				<section class ="box text-style1">
 					<div class ="inner">
-						<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-							<p class="error"><?php echo $userErr; ?></p>
-							<input type="text" class="text" name="Username" placeholder="Username"/>
-							<p class="error"><?php echo $passErr; ?></p>
-							<input type="password" class="text" name="Password" placeholder="Password"/>
-							<br>
-							<input type="submit" value="Login"/>
-						</form> 
-						
-						<?php
-							if($userVer == 1 && $passVer == 1){
-								header("Location: inLib-bookRepo.php");
-							}
-						?>
+						<h2>Logged in as: </h2>
+						<p><?php echo $_SESSION['userLog'];?></p>
 					</div>
 				</section>
 				
