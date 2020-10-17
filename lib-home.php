@@ -46,7 +46,7 @@
 		$count = 0;
 		
 		//Get books
-		$booksDB = mysqli_query($sqlconnect, "select * from books");
+		$booksDB = mysqli_query($sqlconnect, "select * from books order by dateposted desc limit 1");
 		$bookCount = 0;
 		
 		//Get books 
@@ -71,6 +71,7 @@
 			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
 			$_SESSION['title'][$bookCount] = $arrB['Title'];
 			$_SESSION['isbn'][$bookCount] = $arrB['ISBN'];
+			$_SESSION['author'][$bookCount] = $arrB['Author'];
 			$_SESSION['cover'][$bookCount] = $arrB['Cover'];
 			$_SESSION['abstract'][$bookCount] = $arrB['Abstract'];
 			$_SESSION['series'][$bookCount] = $arrB['Series'];
@@ -151,7 +152,7 @@
 							<header>
 								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
 								
-								<p>Author | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
+								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
 							</header>
 							<div class="info">
 								<!--
@@ -172,8 +173,8 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<div class="image featured">
-							<a href="#" class="image featured"><img src="images/Philosopher's Stone.jpg" alt="" /></a>
+							<div class="box">
+							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>"  alt="" /></a>
 							</div>
 							<p>
 								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
@@ -186,8 +187,8 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#">--Book Title #2--</a></h2>
-								<p>Author and Date</p>
+								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
+								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
@@ -198,12 +199,9 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<a href="#" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>" alt="" /></a>
 							<p>
-								Quisque vel sapien sit amet tellus elementum ultricies. Nunc vel orci turpis. Donec id malesuada metus.
-								Nunc nulla velit, fermentum quis interdum quis, tate etiam commodo lorem ipsum dolor sit amet dolore.
-								Quisque vel sapien sit amet tellus elementum ultricies. Nunc vel orci turpis. Donec id malesuada metus.
-								Nunc nulla velit, fermentum quis interdum quis, convallis eu sapien. Integer sed ipsum ante.
+								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
 							</p>
 						</article>
 
