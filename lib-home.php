@@ -9,7 +9,7 @@
 		<title>RepoHub</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link type="text/css" rel="stylesheet" href="assets/css/main.css"/>
 	</head>
 	<body class="is-preload">
 	
@@ -150,7 +150,6 @@
 		<!-- Content -->
 			<div id="content">
 				<div class="inner">
-
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
@@ -185,7 +184,7 @@
 							<?php $pageBookIndex++;?>
 							<!-- <p><?php //echo $pageBookIndex;?></p> -->
 						</article>
-
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
