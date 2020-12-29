@@ -41,13 +41,24 @@
 		}
 		
 		//Get username-pw 
-		$records = array(array("user"=> null, "pass"=> null,));
-		$recordsDB = mysqli_query($sqlconnect, "select * from admin");
+		$records = array(array("user"=> null, "pass"=> null,)); //init array
+		$recordsDB = mysqli_query($sqlconnect, "select * from admin"); //fetching data from bookrepo db
 		$count = 0;
 		
+		//Get books 
+		/*
+		$bookRecords = array("title"=> null, "isbn"=> null, "abstract"=> null, "series"=> null, "pubhouse"=> null, 
+		*/
+		
+		//session init
+		session_start();
+		
+		//Putting users in array
 		while($arr = mysqli_fetch_array($recordsDB)){
 			$records[$count]["user"] = $arr['UserName'];
+			$_SESSION[$count]['user'] = $arr['UserName'];
 			$records[$count]["pass"] = $arr['Password'];
+			$_SESSION[$count]['pass'] = $arr['Password'];
 			$count++;
 		}
 		
@@ -322,7 +333,7 @@
 
 				<!-- Copyright -->
 					<ul id="copyright">
-						<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; LBYCPG2</li><li>Design: Antoc, Jan Luis and Enghoy, Martin Adrian</a></li>
 					</ul>
 
 			</div>

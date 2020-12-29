@@ -2176,8 +2176,8 @@ input, select, textarea {
 
 		#nav li.current a {
 			background-color: rgba(0, 0, 0, 0.15) !important;
-			box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 0.25em 0 rgba(0, 0, 0, 0.25);
 			font-weight: 700;
+			box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 0.25em 0 rgba(0, 0, 0, 0.25);
 			color: #fff;
 		}
 
@@ -2190,7 +2190,7 @@ input, select, textarea {
 			display: block;
 			border-radius: 0.1em;
 			outline: 0;
-			background-color: rgba(0,0,0,0.1);
+			/* background-color: rgba(0,0,0,0.1); */
 		}
 
 /* Sidebar */

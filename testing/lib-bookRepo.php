@@ -9,7 +9,7 @@
 		<title>RepoHub</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link type="text/css" rel="stylesheet" href="assets/css/main.css"/>
+		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload">
 	
@@ -45,55 +45,23 @@
 		$recordsDB = mysqli_query($sqlconnect, "select * from admin"); //fetching data from bookrepo db
 		$count = 0;
 		
-		//Get books
-		$booksDB = mysqli_query($sqlconnect, "select * from books order by dateposted desc");
-		$bookCount = 0;
-		
 		//Get books 
 		/*
 		$bookRecords = array("title"=> null, "isbn"=> null, "abstract"=> null, "series"=> null, "pubhouse"=> null, 
 		*/
 		
-		//session init
-		session_start();
-		
 		//Putting users in array
 		while($arr = mysqli_fetch_array($recordsDB)){
-			//$records[$count]["user"] = $arr['UserName'];
+			$records[$count]["user"] = $arr['UserName'];
 			$_SESSION['user'][$count] = $arr['UserName'];
-			//$records[$count]["pass"] = $arr['Password'];
+			$records[$count]["pass"] = $arr['Password'];
 			$_SESSION['pass'][$count] = $arr['Password'];
 			$count++;
 		}
 		
-		//Putting book details into array
-		while($arrB = mysqli_fetch_array($booksDB)){
-			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
-			$_SESSION['title'][$bookCount] = $arrB['Title'];
-			$_SESSION['isbn'][$bookCount] = $arrB['ISBN'];
-			$_SESSION['author'][$bookCount] = $arrB['Author'];
-			$_SESSION['cover'][$bookCount] = $arrB['Cover'];
-			$_SESSION['abstract'][$bookCount] = $arrB['Abstract'];
-			$_SESSION['series'][$bookCount] = $arrB['Series'];
-			$_SESSION['pubhouse'][$bookCount] = $arrB['PubHouse'];
-			$_SESSION['pubdate'][$bookCount] = $arrB['PubDate'];
-			$_SESSION['country'][$bookCount] = $arrB['Country'];
-			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
-			$bookCount++;
-		}
-		
-		//init of bookCount to pass
-		$_SESSION['bookcount'] = $bookCount;
-		//echo $bookCount;
-		
 		//init variables
 		$username = $password = "";
 		$userErr = $passErr = "";
-		$addIndex = 0;
-		$addIndex = $_GET['page'];
-		
-		//Page variables
-		$pageBookIndex = $addIndex + 0;
 		
 		//Verifs
 		$error = 0;
@@ -111,9 +79,8 @@
 				//Check in admin 
 				$username = formatdata($_POST["username"]);
 				for($userid = 0; $userid < $count; $userid++){
-					if($username == $_SESSION['user'][$userid]){
+					if($username == $records[$userid]["user"]){
 						$userVer = 1;
-						$_SESSION['userLog'] = $_SESSION['user'][$userid];
 						break;
 					}
 				}
@@ -132,9 +99,8 @@
 				$password = formatdata($_POST["password"]);
 				if($userVer == 1){
 					//If Found
-					if($password == $_SESSION['pass'][$userid]){
+					if($password == $records[$idNum]["pass"]){
 						$passVer = 1;
-						$_SESSION['userPass'] = $_SESSION['pass'][$userid];
 					}
 					else {
 						$passErr = "Password does not match!";
@@ -142,9 +108,6 @@
 					}
 				}
 			}
-			if($userVer == 1 && $passVer == 1){
-				header("Location: inLib-Home.php");
-			}	
 		}
 		
 	?>
@@ -152,13 +115,12 @@
 		<!-- Content -->
 			<div id="content">
 				<div class="inner">
+
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-1];?></a></h2>
-								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
-								
-								<p><?php echo $_SESSION['author'][$pageBookIndex-1];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex-1];?></p>
+								<h2><a href="#">--Book Title #1--</a></h2>
+								<p>Author and Date</p>
 							</header>
 							<div class="info">
 								<!--
@@ -179,20 +141,17 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex-1]?>"  alt="" /></a>
+							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pageBookIndex-1];?>
+								<strong>Book's Synopsis</strong> There's something to be put here regarding the book's contents. This space is reserved for the synopsis. This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.
 							</p>
-							
-							<?php $pageBookIndex;?>
-							<-- <p><?php echo $pageBookIndex;?></p> -->
 						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
-								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
+								<h2><a href="#">--Book Title #2--</a></h2>
+								<p>Author and Date</p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
@@ -203,18 +162,21 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>" alt="" /></a>
+							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
+								Quisque vel sapien sit amet tellus elementum ultricies. Nunc vel orci turpis. Donec id malesuada metus.
+								Nunc nulla velit, fermentum quis interdum quis, tate etiam commodo lorem ipsum dolor sit amet dolore.
+								Quisque vel sapien sit amet tellus elementum ultricies. Nunc vel orci turpis. Donec id malesuada metus.
+								Nunc nulla velit, fermentum quis interdum quis, convallis eu sapien. Integer sed ipsum ante.
 							</p>
 						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 					<!-- Pagination -->
 						<div class="pagination">
 							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
 								<a href="#" class="active">1</a>
-								<a href="#" action="<?php $addIndex = 2;?>">2</a>
+								<a href="#">2</a>
 								<a href="#">3</a>
 								<a href="#">4</a>
 								<span>&hellip;</span>
@@ -236,9 +198,14 @@
 					<nav id="nav">
 						<ul>
 							<li class="current"><a href="#">Latest Post</a></li>
-							<li><a href="lib-bookRepo.php">Book Repo</a></li>
-							<li><a href="lib-AddBook.php">Add Book</a></li>
-							<li><a href="lib-AboutRepoHub.php">About RepoHub</a></li>
+							<li><a href="#">Book Repo</a></li>
+							<ul>
+								<li class="sub"><a href="#">Add Book</a></li>
+								<li class="sub"><a href="#">Edit Book Details </a></li>
+								<li class="sub"><a href="#">Remove Book</a></li>
+								<li class="sub"><a href="#"></a></li>
+							</ul>
+							<li><a href="#">About RepoHub</a></li>
 						</ul>
 					</nav>
 
@@ -247,17 +214,12 @@
 					<div class ="inner">
 						<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 							<p class="error"><?php echo $userErr; ?></p>
-							<input type="text" class="text" name="username" placeholder="Username"/>
+							<input type="text" class="text" name="Username" placeholder="Username"/>
 							<p class="error"><?php echo $passErr; ?></p>
-							<input type="password" class="text" name="password" placeholder="Password"/>
+							<input type="password" class="text" name="Password" placeholder="Password"/>
 							<br>
 							<input type="submit" value="Login"/>
 						</form> 
-						<?php 
-							//if($userVer == 1 && $passVer == 1){
-							//	header("Location: inLib-Home.php");
-							//}
-						?>
 					</div>
 				</section>
 				
@@ -268,17 +230,27 @@
 						</form>
 					</section>
 
+				<!-- Text -->
+					<section class="box text-style1">
+						<div class="inner">
+							<p>
+								<strong>Striped:</strong> A free and fully responsive HTML5 site
+								template designed by <a href="http://twitter.com/ajlkn">AJ</a> for <a href="http://html5up.net/">HTML5 UP</a>
+							</p>
+						</div>
+					</section>
+
 				<!-- Recent Posts -->
 					<section class="box recent-posts">
 						<header>
 							<h2>Recent Posts</h2>
 						</header>
 						<ul>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-1];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-2];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-3];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-4];?></a></li>
+							<li><a href="#">Lorem ipsum dolor</a></li>
+							<li><a href="#">Feugiat nisl aliquam</a></li>
+							<li><a href="#">Sed dolore magna</a></li>
+							<li><a href="#">Malesuada commodo</a></li>
+							<li><a href="#">Ipsum metus nullam</a></li>
 						</ul>
 					</section>
 
