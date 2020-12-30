@@ -90,11 +90,28 @@
 		$username = $password = "";
 		$userErr = $passErr = "";
 		$addIndex = 0;
+		$pageBookIndex = 0;
 		$addIndex = $_GET['page'];
 		
 		//Page variables
 		$pageBookIndex = $addIndex + 0;
 		
+		//Storing page values into $_SESSION array
+		$pageIndex = $_GET['page'];
+		echo $pageIndex;
+		$pageTotal = ceil($bookCount / 2);
+		//echo $pageTotal;
+		$pageCont = 0;
+		for($i = 0; $i > $pageTotal; $i+=2){
+			for($y = 0; $y > 2; $y++){
+				$_SESSION['page'][$i][$y] = $pageCont;
+				echo $_SESSION['page'][$i][$y];
+				$pageCont++;
+				echo $pageCont;
+			}
+			$pageCont++;
+		}
+		echo $pageCont;
 		//Verifs
 		$error = 0;
 		$userVer = 0;
@@ -155,10 +172,10 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-1];?></a></h2>
+								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
 								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
 								
-								<p><?php echo $_SESSION['author'][$pageBookIndex-1];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex-1];?></p>
+								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
 							</header>
 							<div class="info">
 								<!--
@@ -179,9 +196,9 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex-1]?>"  alt="" /></a>
+							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>"  alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pageBookIndex-1];?>
+								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
 							</p>
 							
 							<?php $pageBookIndex;?>
@@ -213,8 +230,8 @@
 						<div class="pagination">
 							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
-								<a href="#" class="active">1</a>
-								<a href="#" action="<?php $addIndex = 2;?>">2</a>
+								<a href="lib-home.php?page=1" class="active">1</a>
+								<a href="lib-home.php?page=2" action="">2</a>
 								<a href="#">3</a>
 								<a href="#">4</a>
 								<span>&hellip;</span>
