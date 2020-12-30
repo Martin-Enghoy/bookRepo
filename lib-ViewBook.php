@@ -86,6 +86,9 @@
 		}
 		*/
 		
+		//Getting the $_SESSION values 
+		$bookIndex = $_GET['bookID'];
+		
 		//init variables
 		$username = $password = "";
 		$userErr = $passErr = "";
@@ -154,10 +157,11 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
+								<h2><a href="#"><?php echo $_SESSION['title'][$bookIndex];?></a></h2>
 								
-								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
+								<p><?php echo $_SESSION['author'][$bookIndex];?> | <?php echo $_SESSION['pubdate'][$bookIndex];?></p>
 							</header>
+							<!--
 							<div class="info">
 								<!--
 									Note: The date should be formatted exactly as it's shown below. In particular, the
@@ -165,11 +169,11 @@
 									element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
 									Oh, and if you don't need a date for a particular page or post you can simply delete
 									the entire "date" element.
-								-->
+								
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
 								<!--
 									Note: You can change the number of list items in "stats" to whatever you want.
-								-->
+								
 								<ul class="stats">
 									<li><a href="#" class="icon fa-comment">16</a></li>
 									<li><a href="#" class="icon fa-heart">32</a></li>
@@ -177,22 +181,41 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
+							-->
+							<h3>
+								<b>ISBN: </b><?php echo $_SESSION['isbn'][$bookIndex];?>
+							</h3>
 							<div class="box">
-							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>"  alt="" /></a>
+							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$bookIndex]?>"  alt="" /></a>
 							</div>
 							<p>
-								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
+								<?php echo $_SESSION['abstract'][$bookIndex];?>
+							</p>
+							<p>
+								<b>Series: </b><?php echo $_SESSION['series'][$bookIndex];?>
+							</p>
+							<p>
+								<b>Publishing House: </b><?php echo $_SESSION['pubhouse'][$bookIndex];?>
+							</p>
+							<p>
+								<b>Publishing Date: </b><?php echo $_SESSION['pubdate'][$bookIndex];?>
+							</p>
+							<p>
+								<b>Country: </b><?php echo $_SESSION['country'][$bookIndex];?>
+							</p>
+							<p>
+								<b>Date Posted: </b><?php echo $_SESSION['date'][$bookIndex];?>
 							</p>
 							
-							<?php $pageBookIndex++;?>
+							<?php //$pageBookIndex++;?>
 							<!-- <p><?php //echo $pageBookIndex;?></p> -->
 						</article>
 
-					<!-- Post -->
+					<!-- Post 
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
-								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
+								<h2><a href="#"><?php //echo $_SESSION['title'][$pageBookIndex];?></a></h2>
+								<p><?php //echo $_SESSION['author'][$pageBookIndex];?> | <?php //echo $_SESSION['pubdate'][$pageBookIndex];?></p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
@@ -203,15 +226,15 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>" alt="" /></a>
+							<a href="#" class="image centered"><img class="image centered" src="<?php //echo "images/" . $_SESSION['cover'][$pageBookIndex]?>" alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
+								<?php //echo $_SESSION['abstract'][$pageBookIndex];?>
 							</p>
 						</article>
-
-					<!-- Pagination -->
+					-->
+					<!-- Pagination 
 						<div class="pagination">
-							<!--<a href="#" class="button previous">Previous Page</a>-->
+							<!--<a href="#" class="button previous">Previous Page</a>
 							<div class="pages">
 								<a href="#" class="active">1</a>
 								<a href="#">2</a>
@@ -222,6 +245,7 @@
 							</div>
 							<a href="#" class="button next">Next Page</a>
 						</div>
+						-->
 
 				</div>
 			</div>
@@ -235,7 +259,7 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="#">Latest Post</a></li>
+							<li class=""><a href="lib-home.php?page=1">Latest Post</a></li>
 							<li><a href="#">Book Repo</a></li>
 							<li><a href="#">Add Book</a></li>
 							<li><a href="#">About RepoHub</a></li>
