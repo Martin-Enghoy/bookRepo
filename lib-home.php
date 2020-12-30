@@ -98,20 +98,22 @@
 		
 		//Storing page values into $_SESSION array
 		$pageIndex = $_GET['page'];
-		echo $pageIndex;
+		//echo $pageIndex;
 		$pageTotal = ceil($bookCount / 2);
 		//echo $pageTotal;
 		$pageCont = 0;
-		for($i = 0; $i > $pageTotal; $i+=2){
-			for($y = 0; $y > 2; $y++){
-				$_SESSION['page'][$i][$y] = $pageCont;
-				echo $_SESSION['page'][$i][$y];
+		for($i = 0; $i < $pageTotal; $i++){
+			for($y = 0; $y < 2; $y++){
+				$pages[$i][$y] = $pageCont;
+				echo $pages[$i][$y] . "+";
 				$pageCont++;
-				echo $pageCont;
+				//echo "=" . $i;
+				//echo $pageCont ."-";
 			}
-			$pageCont++;
+			echo " ";
+			//$pageCont++;
 		}
-		echo $pageCont;
+		//echo $pageCont;
 		//Verifs
 		$error = 0;
 		$userVer = 0;
@@ -172,10 +174,10 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
+								<h2><a href="#"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
 								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
 								
-								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
+								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
 							</header>
 							<div class="info">
 								<!--
@@ -196,9 +198,9 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>"  alt="" /></a>
+							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
+								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
 							</p>
 							
 							<?php $pageBookIndex;?>
@@ -208,8 +210,8 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></h2>
-								<p><?php echo $_SESSION['author'][$pageBookIndex];?> | <?php echo $_SESSION['pubdate'][$pageBookIndex];?></p>
+								<h2><a href="#"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
+								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
@@ -220,9 +222,9 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pageBookIndex]?>" alt="" /></a>
+							<a href="#" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pageBookIndex];?>
+								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
 							</p>
 						</article>
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
