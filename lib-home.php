@@ -204,7 +204,7 @@
 							</p>
 							
 							<?php $pageBookIndex;?>
-							<-- <p><?php echo $pageBookIndex;?></p> -->
+							<!-- <p><?php //echo $pageBookIndex;?></p> -->
 						</article>
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 					<!-- Post -->
@@ -293,15 +293,17 @@
 							<h2>Recent Posts</h2>
 						</header>
 						<ul>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-1];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-2];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-3];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$pageBookIndex-4];?></a></li>
+							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-1];?></a></li>
+							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-2];?></a></li>
+							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-3];?></a></li>
+							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-4];?></a></li>
+							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-5];?></a></li>
 						</ul>
 					</section>
+				<br><br><br><br><br><br><br><br><br><br>
 
 				<!-- Recent Comments -->
+				<!--
 					<section class="box recent-comments">
 						<header>
 							<h2>Recent Comments</h2>
@@ -312,6 +314,7 @@
 							<li>case on <a href="#">Sed dolore magna</a></li>
 						</ul>
 					</section>
+				-->
 
 				<!-- Calendar -->
 					<section class="box calendar">
