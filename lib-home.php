@@ -273,7 +273,15 @@
 												if($i = $pageIndex){
 													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
 												}
-												else if($i 
+												else if($i < 4){
+													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+												} 
+												else if($i = 4){
+													echo "<span>&hellip;</span>";
+												}
+												else if($i > 4){
+													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
+												}
 											}
 										}
 									}
@@ -327,6 +335,10 @@
 						?>
 					</div>
 				</section>
+				<br><br>
+				
+				<a href="lib-reg.php">Not yet Registered?</a>
+				
 				<br><br>	
 				<!-- Search -->
 					<section class="box search">

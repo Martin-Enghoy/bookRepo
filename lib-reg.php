@@ -67,6 +67,7 @@
 		}
 		
 		//Putting book details into array
+		/*
 		while($arrB = mysqli_fetch_array($booksDB)){
 			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
 			$_SESSION['title'][$bookCount] = $arrB['Title'];
@@ -81,27 +82,29 @@
 			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
 			$bookCount++;
 		}
+		*/
 		
 		//init of bookCount to pass
-		$_SESSION['bookcount'] = $bookCount;
+		//$_SESSION['bookcount'] = $bookCount;
 		//echo $bookCount;
 		
 		//init variables
 		$username = $password = "";
-		$userErr = $passErr = "";
+		$userErr = $passErr = $firstErr = $lastErr = $emailErr = $institErr = $conErr = $simiErr = "";
 		$addIndex = 0;
 		$pageBookIndex = 0;
-		$addIndex = $_GET['page'];
+		//$addIndex = $_GET['page'];
 		
 		//Page variables
-		$pageBookIndex = $addIndex + 0;
+		//$pageBookIndex = $addIndex + 0;
 		
 		//Storing page values into local array
-		$pageIndex = $_GET['page'];
+		//$pageIndex = $_GET['page'];
 		//echo $pageIndex;
-		$pageTotal = ceil($bookCount / 2);
+		//$pageTotal = ceil($bookCount / 2);
 		//echo $pageTotal;
-		$pageCont = 0;
+		//$pageCont = 0;
+		/*
 		for($i = 0; $i < $pageTotal; $i++){
 			for($y = 0; $y < 2; $y++){
 				$pages[$i][$y] = $pageCont;
@@ -113,42 +116,59 @@
 			echo " ";
 			//$pageCont++;
 		}
+		*/
 		//echo $pageCont;
+		
+		
 		//Verifs
 		$error = 0;
+		$firstVer = 0;
+		$lastVer = 0;
+		$emailVer = 0;
+		$institVer = 0;
 		$userVer = 0;
 		$passVer = 0;
+		$conVer = 0;
+		
 		
 		//Error check and catch
 		if($_SERVER["REQUEST_METHOD"]=="POST"){
 			//Input Check
-			if(empty($_POST["username"])){
+			if(empty($_POST["userName"])){
 				$userErr = "Please input your Username!";
 				$error = 1;
 			}	
 			else {
 				//Check in admin 
-				$username = formatdata($_POST["username"]);
+				$username = formatdata($_POST["userName"]);
 				for($userid = 0; $userid < $count; $userid++){
 					if($username == $_SESSION['user'][$userid]){
-						$userVer = 1;
+						$error = 1;
 						$_SESSION['userLog'] = $_SESSION['user'][$userid];
+						$userErr = "Username already exists!";
+						
 						break;
 					}
 				}
 			}
 			
+			
+			
+			
 			//Error message for UserName not found.
-			if($userVer == 0 && !empty($_POST["username"])){
+			/*
+			if($userVer == 0 && !empty($_POST["userName"])){
 				$userErr = "Username does not exist!";
 			}
+			*/
 			
 			//PW Check
-			if(empty($_POST["password"])){
+			/*
+			if(empty($_POST["passWord"])){
 				$passErr = "Please input a Password!";
 			} 
 			else {
-				$password = formatdata($_POST["password"]);
+				$password = formatdata($_POST["passWord"]);
 				if($userVer == 1){
 					//If Found
 					if($password == $_SESSION['pass'][$userid]){
@@ -161,9 +181,57 @@
 					}
 				}
 			}
-			if($userVer == 1 && $passVer == 1){
-				header("Location: inLib-Home.php");
-			}	
+			*/
+			
+			//
+			
+			
+			//Placeholder is Empty Checks
+			if(empty($_POST["firstName"])){
+				$firstErr = "Please input your First Name!";
+				$error = 1;
+			}
+			if(empty($_POST["lastName"])){
+				$lastErr = "Please input your Last Name!";
+				$error = 1;
+			}
+			if(empty($_POST["emailAdd"])){
+				$emailErr = "Please input your Email Address!";
+				$error = 1;
+			}
+			if(empty($_POST["Institution"])){
+				$institErr = "Please input your Institution!";
+				$error = 1;
+			}
+			if(empty($_POST["passWord"])){
+				$passErr = "Please input your Password!";
+				$error = 1;
+			}
+			if(empty($_POST["conPass"])){
+				$conErr = "Please confirm your Password!";
+				$error = 1;
+			}
+			
+			//Password Check for similarity
+			if($_POST["passWord"] != $_POST["conPass"]){
+				$simiErr = "Password does not match!";
+				$error = 1;
+			}
+
+
+			if($error != 1){
+				$firstn = $_POST["firstName"];
+				$lastn = $_POST["lastName"];
+				$emailAddress = $_POST["emailAdd"];
+				$institution = $_POST["Institution"];
+				$userName = $_POST["userName"];
+				$passWord = $_POST["passWord"];
+				mysqli_query($sqlconnect, "INSERT INTO
+				admin(UserName, Password, FirstName, LastName, EmailAdd, Instit)
+									VALUES('$userName','$passWord','$firstn','$lastn','$emailAddress','$institution');");
+				$error = 2;
+				header("Location: lib-home.php?page=1");
+			}
 		}
 		
 	?>
@@ -171,77 +239,26 @@
 		<!-- Content -->
 			<div id="content">
 				<div class="inner">
-					<!-- Post -->
-						<article class="box post post-excerpt">
-							<header>
-								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
-								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
-								
-								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
-							</header>
-							<div class="info">
-								<!--
-									Note: The date should be formatted exactly as it's shown below. In particular, the
-									"least significant" characters of the month should be encapsulated in a <span>
-									element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
-									Oh, and if you don't need a date for a particular page or post you can simply delete
-									the entire "date" element.
-								-->
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
-								<!--
-									Note: You can change the number of list items in "stats" to whatever you want.
-								-->
-								<ul class="stats">
-									<li><a href="#" class="icon fa-comment">16</a></li>
-									<li><a href="#" class="icon fa-heart">32</a></li>
-									<li><a href="#" class="icon brands fa-twitter">64</a></li>
-									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
-								</ul>
-							</div>
-							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
-							<p>
-								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
-							</p>
-							
-							<?php $pageBookIndex;?>
-							<!-- <p><?php //echo $pageBookIndex;?></p> -->
-						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<!-- Post -->
-						<article class="box post post-excerpt">
-							<header>
-								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
-								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
-							</header>
-							<div class="info">
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
-								<ul class="stats">
-									<li><a href="#" class="icon fa-comment">16</a></li>
-									<li><a href="#" class="icon fa-heart">32</a></li>
-									<li><a href="#" class="icon brands fa-twitter">64</a></li>
-									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
-								</ul>
-							</div>
-							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
-							<p>
-								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
-							</p>
-						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<!-- Pagination -->
-						<div class="pagination">
-							<!--<a href="#" class="button previous">Previous Page</a>-->
-							<div class="pages">
-								<a href="lib-home.php?page=1" class="active">1</a>
-								<a href="lib-home.php?page=2" action="">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<span>&hellip;</span>
-								<a href="#">20</a>
-							</div>
-							<a href="#" class="button next">Next Page</a>
-						</div>
-
+					<header><h2>RepoHub: Registration Form</h2></header>
+					<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+						<h4>First Name: </h4>
+						<input type="text" class="text" name="firstName" placeholder="Your First Name"/><p class="error"><?php echo $firstErr; ?></p>
+						<h4>Last Name: </h4>
+						<input type="text" class="text" name="lastName" placeholder="Your Last Name"/><p class="error"><?php echo $lastErr; ?></p>
+						<h4>Email Address: </h4>
+						<input type="text" class="text" name="emailAdd" placeholder="Your Email Address"/><p class="error"><?php echo $emailErr; ?></p>
+						<h4>Institution: </h4>
+						<input type="text" class="text" name="Institution" placeholder="Your School / Institution"/><p class="error"><?php echo $institErr; ?></p>
+						<h4>Username: </h4>
+						<input type="text" class="text" name="userName" placeholder="Your Username"/><p class="error"><?php echo $userErr; ?></p>
+						<h4>Password: </h4>
+						<input type="password" class="text" name="passWord" placeholder="Password"/><p class="error"><?php echo $passErr; ?></p>
+						<h4>Confirm Password: </h4>
+						<input type="password" class="text" name="conPass" placeholder="Confirm"/><p class="error"><?php echo $conErr; ?></p>
+						<p class="error"><?php echo $simiErr; ?></p>
+						<br>
+						<input type="submit" value="Register"/>
+					</form>
 				</div>
 			</div>
 
@@ -249,25 +266,25 @@
 			<div id="sidebar">
 
 				<!-- Logo -->
-					<h1 id="logo"><a href="#">RepoHub</a></h1>
+					<h1 id="logo"><a href="lib-home.php?page=1">RepoHub</a></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="#">Latest Post</a></li>
+							<li><a href="lib-home.php?page=1">Latest Post</a></li>
 							<li><a href="lib-bookRepo.php">Book Repo</a></li>
 							<li><a href="lib-AddBook.php">Add Book</a></li>
 							<li><a href="lib-AboutRepoHub.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
-				<!-- Login -->
+				<!-- Login 
 				<section class ="box text-style1">
 					<div class ="inner">
-						<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-							<p class="error"><?php echo $userErr; ?></p>
+						<form method="post" action="<?php //echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+							<p class="error"><?php //echo $userErr; ?></p>
 							<input type="text" class="text" name="username" placeholder="Username"/>
-							<p class="error"><?php echo $passErr; ?></p>
+							<p class="error"><?php //echo $passErr; ?></p>
 							<input type="password" class="text" name="password" placeholder="Password"/>
 							<br>
 							<input type="submit" value="Login"/>
@@ -279,9 +296,11 @@
 						?>
 					</div>
 				</section>
+				-->
 				
 				<!-- Search -->
 					<section class="box search">
+						<br><br>
 						<form method="post" action="#">
 							<input type="text" class="text" name="search" placeholder="Search" />
 						</form>
@@ -384,7 +403,13 @@
 					</ul>
 
 			</div>
-
+		
+			<?php 
+				//if ($error == 2){
+					//header("Location: inLib-home.php?page=1");
+				//}
+			?>
+		
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
