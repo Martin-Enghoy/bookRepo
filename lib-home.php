@@ -232,14 +232,62 @@
 						<div class="pagination">
 							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
+								<?php 
+									for($i = 1; $i <= $pageTotal; $i++){
+										if($pageTotal <= 6){
+											if($i == $pageIndex){
+												echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+											} 
+											else {
+												echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+											}
+										}
+										if($pageTotal > 6){
+											if($pageIndex >= $pageTotal-3){
+												if($i == 1){
+													echo "<a href=\"lib-home.php?page=1\">1</a>";
+													echo "<span>&hellip;</span>";
+												}
+												else if($i = $pageIndex){
+													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+												}
+												else {
+													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+												}
+											}
+											else if($pageIndex >= 4){
+												if(($i = $pageIndex-2) || ($i = $pageIndex-1)){
+													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+												}
+												else if($i = $pageIndex){
+													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+												}
+												else if($i = $pageIndex+1){
+													echo "<span>&hellip;</span>";
+												}
+												else if($i = $pageIndex+2){
+													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
+												}
+											}
+											else if($pageIndex < 4){
+												if($i = $pageIndex){
+													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+												}
+												else if($i 
+											}
+										}
+									}
+								?>
+								<!--
 								<a href="lib-home.php?page=1" class="active">1</a>
 								<a href="lib-home.php?page=2">2</a>
 								<a href="#">3</a>
 								<a href="#">4</a>
 								<span>&hellip;</span>
 								<a href="#">20</a>
+								-->
 							</div>
-							<a href="#" class="button next">Next Page</a>
+							<a href="lib-home.php?page=<?php echo $pageIndex+1;?>" class="button next">Next Page</a>
 						</div>
 
 				</div>
