@@ -9,7 +9,7 @@
 		<title>RepoHub</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link type="text/css" rel="stylesheet" href="assets/css/main.css"/>
 	</head>
 	<body class="is-preload">
 	
@@ -45,11 +45,9 @@
 		$recordsDB = mysqli_query($sqlconnect, "select * from admin"); //fetching data from bookrepo db
 		$count = 0;
 		
-		/*
 		//Get books
-		$booksDB = mysqli_query($sqlconnect, "select * from books order by dateposted desc limit 1");
+		$booksDB = mysqli_query($sqlconnect, "select * from books order by dateposted desc");
 		$bookCount = 0;
-		*/
 		
 		//Get books 
 		/*
@@ -68,7 +66,6 @@
 			$count++;
 		}
 		
-		/*
 		//Putting book details into array
 		while($arrB = mysqli_fetch_array($booksDB)){
 			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
@@ -84,18 +81,39 @@
 			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
 			$bookCount++;
 		}
-		*/
 		
-		//Getting the $_SESSION values 
-		$bookIndex = $_GET['bookID'];
+		//init of bookCount to pass
+		$_SESSION['bookcount'] = $bookCount;
+		//echo $bookCount;
 		
 		//init variables
 		$username = $password = "";
 		$userErr = $passErr = "";
+		$addIndex = 0;
+		$pageBookIndex = 0;
+		$addIndex = $_GET['page'];
 		
 		//Page variables
-		//$pageBookIndex = 0;
+		$pageBookIndex = $addIndex + 0;
 		
+		//Storing page values into local array
+		$pageIndex = $_GET['page'];
+		//echo $pageIndex;
+		$pageTotal = ceil($bookCount / 2);
+		//echo $pageTotal;
+		$pageCont = 0;
+		for($i = 0; $i < $pageTotal; $i++){
+			for($y = 0; $y < 2; $y++){
+				$pages[$i][$y] = $pageCont;
+				echo $pages[$i][$y] . "+";
+				$pageCont++;
+				//echo "=" . $i;
+				//echo $pageCont ."-";
+			}
+			echo " ";
+			//$pageCont++;
+		}
+		//echo $pageCont;
 		//Verifs
 		$error = 0;
 		$userVer = 0;
@@ -144,7 +162,7 @@
 				}
 			}
 			if($userVer == 1 && $passVer == 1){
-				header("Location: inLib-ViewBook.php");
+				header("Location: inLib-Home.php");
 			}	
 		}
 		
@@ -153,15 +171,14 @@
 		<!-- Content -->
 			<div id="content">
 				<div class="inner">
-
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$bookIndex];?></a></h2>
+								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
+								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
 								
-								<p><?php echo $_SESSION['author'][$bookIndex];?> | <?php echo $_SESSION['pubdate'][$bookIndex];?></p>
+								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
 							</header>
-							<!--
 							<div class="info">
 								<!--
 									Note: The date should be formatted exactly as it's shown below. In particular, the
@@ -169,11 +186,11 @@
 									element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
 									Oh, and if you don't need a date for a particular page or post you can simply delete
 									the entire "date" element.
-								
+								-->
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
 								<!--
 									Note: You can change the number of list items in "stats" to whatever you want.
-								
+								-->
 								<ul class="stats">
 									<li><a href="#" class="icon fa-comment">16</a></li>
 									<li><a href="#" class="icon fa-heart">32</a></li>
@@ -181,41 +198,20 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							-->
-							<h3>
-								<b>ISBN: </b><?php echo $_SESSION['isbn'][$bookIndex];?>
-							</h3>
-							<div class="box">
-							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$bookIndex]?>"  alt="" /></a>
-							</div>
+							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Series: </b><?php echo $_SESSION['series'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Publishing House: </b><?php echo $_SESSION['pubhouse'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Publishing Date: </b><?php echo $_SESSION['pubdate'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Country: </b><?php echo $_SESSION['country'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Date Posted: </b><?php echo $_SESSION['date'][$bookIndex];?>
+								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
 							</p>
 							
-							<?php //$pageBookIndex++;?>
+							<?php $pageBookIndex;?>
 							<!-- <p><?php //echo $pageBookIndex;?></p> -->
 						</article>
-
-					<!-- Post 
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#"><?php //echo $_SESSION['title'][$pageBookIndex];?></a></h2>
-								<p><?php //echo $_SESSION['author'][$pageBookIndex];?> | <?php //echo $_SESSION['pubdate'][$pageBookIndex];?></p>
+								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
+								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
@@ -226,18 +222,18 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image centered"><img class="image centered" src="<?php //echo "images/" . $_SESSION['cover'][$pageBookIndex]?>" alt="" /></a>
+							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
 							<p>
-								<?php //echo $_SESSION['abstract'][$pageBookIndex];?>
-							</p>	
+								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
+							</p>
 						</article>
-					-->
-					<!-- Pagination 
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+					<!-- Pagination -->
 						<div class="pagination">
-							<!--<a href="#" class="button previous">Previous Page</a>
+							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
-								<a href="#" class="active">1</a>
-								<a href="#">2</a>
+								<a href="lib-home.php?page=1" class="active">1</a>
+								<a href="lib-home.php?page=2" action="">2</a>
 								<a href="#">3</a>
 								<a href="#">4</a>
 								<span>&hellip;</span>
@@ -245,7 +241,6 @@
 							</div>
 							<a href="#" class="button next">Next Page</a>
 						</div>
-						-->
 
 				</div>
 			</div>
@@ -259,10 +254,10 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class=""><a href="lib-home.php?page=1">Latest Post</a></li>
-							<li><a href="#">Book Repo</a></li>
-							<li><a href="#">Add Book</a></li>
-							<li><a href="#">About RepoHub</a></li>
+							<li class="current"><a href="#">Latest Post</a></li>
+							<li><a href="lib-bookRepo.php">Book Repo</a></li>
+							<li><a href="lib-AddBook.php">Add Book</a></li>
+							<li><a href="lib-AboutRepoHub.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
@@ -306,7 +301,9 @@
 						</ul>
 					</section>
 				<br><br><br><br><br><br><br><br><br><br>
+
 				<!-- Recent Comments -->
+				<!--
 					<section class="box recent-comments">
 						<header>
 							<h2>Recent Comments</h2>
@@ -317,6 +314,7 @@
 							<li>case on <a href="#">Sed dolore magna</a></li>
 						</ul>
 					</section>
+				-->
 
 				<!-- Calendar -->
 					<section class="box calendar">

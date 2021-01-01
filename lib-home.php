@@ -96,7 +96,7 @@
 		//Page variables
 		$pageBookIndex = $addIndex + 0;
 		
-		//Storing page values into $_SESSION array
+		//Storing page values into local array
 		$pageIndex = $_GET['page'];
 		//echo $pageIndex;
 		$pageTotal = ceil($bookCount / 2);
@@ -233,7 +233,7 @@
 							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
 								<a href="lib-home.php?page=1" class="active">1</a>
-								<a href="lib-home.php?page=2" action="">2</a>
+								<a href="lib-home.php?page=2">2</a>
 								<a href="#">3</a>
 								<a href="#">4</a>
 								<span>&hellip;</span>
@@ -279,9 +279,10 @@
 						?>
 					</div>
 				</section>
-				
+				<br><br>	
 				<!-- Search -->
 					<section class="box search">
+					<br><br>
 						<form method="post" action="#">
 							<input type="text" class="text" name="search" placeholder="Search" />
 						</form>
@@ -293,11 +294,11 @@
 							<h2>Recent Posts</h2>
 						</header>
 						<ul>
-							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-1];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-2];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-3];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-4];?></a></li>
-							<li><a href="#"><?php echo $_SESSION['title'][$bookCount-5];?></a></li>
+							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-1;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-1];?></a></li>
+							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-2;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-2];?></a></li>
+							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-3;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-3];?></a></li>
+							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-4;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-4];?></a></li>
+							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-5;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-5];?></a></li>
 						</ul>
 					</section>
 				<br><br><br><br><br><br><br><br><br><br>
