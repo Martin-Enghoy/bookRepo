@@ -90,7 +90,7 @@
 		
 		//init variables
 		$username = $password = "";
-		$userErr = $passErr = $firstErr = $lastErr = $emailErr = $institErr = $conErr = $simiErr = "";
+		$userErr = $passErr = $firstErr = $lastErr = $emailErr = $institErr = $conErr = $simiErr = $occErr = "";
 		$addIndex = 0;
 		$pageBookIndex = 0;
 		//$addIndex = $_GET['page'];
@@ -146,7 +146,6 @@
 						$error = 1;
 						$_SESSION['userLog'] = $_SESSION['user'][$userid];
 						$userErr = "Username already exists!";
-						
 						break;
 					}
 				}
@@ -209,7 +208,11 @@
 			}
 			if(empty($_POST["conPass"])){
 				$conErr = "Please confirm your Password!";
-				$error = 1;
+				$error = 1;	
+			}
+			if(empty($_POST["class"])){
+				$occErr = "Please select an Occupation!";
+				$error = 1;	
 			}
 			
 			//Password Check for similarity
@@ -226,9 +229,10 @@
 				$institution = $_POST["Institution"];
 				$userName = $_POST["userName"];
 				$passWord = $_POST["passWord"];
+				$occupation = $_POST["class"];
 				mysqli_query($sqlconnect, "INSERT INTO
-				admin(UserName, Password, FirstName, LastName, EmailAdd, Instit)
-									VALUES('$userName','$passWord','$firstn','$lastn','$emailAddress','$institution');");
+				admin(UserName, Password, FirstName, LastName, EmailAdd, Instit, Class)
+									VALUES('$userName','$passWord','$firstn','$lastn','$emailAddress','$institution','$occupation');");
 				$error = 2;
 				header("Location: lib-home.php?page=1");
 			}
@@ -249,6 +253,12 @@
 						<input type="text" class="text" name="emailAdd" placeholder="Your Email Address"/><p class="error"><?php echo $emailErr; ?></p>
 						<h4>Institution: </h4>
 						<input type="text" class="text" name="Institution" placeholder="Your School / Institution"/><p class="error"><?php echo $institErr; ?></p>
+						<h4>Occupation: </h4>
+						<select name="class"> 
+							<option value="">--Select Occupation--</option>
+							<option value="Admin">Admin</option>
+							<option value="Student">Student</option>
+						</select><?php echo $occErr; ?></p>
 						<h4>Username: </h4>
 						<input type="text" class="text" name="userName" placeholder="Your Username"/><p class="error"><?php echo $userErr; ?></p>
 						<h4>Password: </h4>
