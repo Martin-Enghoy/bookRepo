@@ -148,7 +148,7 @@
 			//PW Check
 			if(empty($_POST["password"])){
 				$passErr = "Please input a Password!";
-			} 
+			}
 			else {
 				$password = formatdata($_POST["password"]);
 				if($userVer == 1){
@@ -237,6 +237,8 @@
 							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
 								<?php 
+									//echo $pageTotal . " ";
+									//echo $pageIndex . " ";
 									for($i = 1; $i <= $pageTotal; $i++){
 										if($pageTotal <= 6){
 											if($i == $pageIndex){
@@ -246,13 +248,13 @@
 												echo "<a href=\"lib-home.php?page=$i\">$i</a>";
 											}
 										}
-										if($pageTotal > 6){
+										else if($pageTotal > 6){
 											if($pageIndex >= $pageTotal-3){
 												if($i == 1){
 													echo "<a href=\"lib-home.php?page=1\">1</a>";
 													echo "<span>&hellip;</span>";
 												}
-												else if($i = $pageIndex){
+												else if($i == $pageIndex){
 													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
 												}
 												else {
@@ -260,30 +262,31 @@
 												}
 											}
 											else if($pageIndex >= 4){
-												if(($i = $pageIndex-2) || ($i = $pageIndex-1)){
+												if(($i == $pageIndex-2) || ($i == $pageIndex-1)){
 													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
 												}
-												else if($i = $pageIndex){
+												else if($i == $pageIndex){
 													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
 												}
-												else if($i = $pageIndex+1){
+												else if($i == $pageIndex+1){
 													echo "<span>&hellip;</span>";
 												}
-												else if($i = $pageIndex+2){
+												else if($i == $pageIndex+2){
 													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
 												}
 											}
 											else if($pageIndex < 4){
-												if($i = $pageIndex){
+												if($i == $pageIndex){ //1
 													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
-												}
-												else if($i < 4){
+												} 
+												//echo $i;
+												else if($i < 5){
 													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
 												} 
-												else if($i = 4){
+												else if($i == 5){
 													echo "<span>&hellip;</span>";
 												}
-												else if($i > 4){
+												else if($i == 6){
 													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
 												}
 											}
@@ -338,8 +341,7 @@
 						?>
 					</div>
 				</section>
-				<br><br><br>
-				
+				<br><br>				
 				<a href="lib-reg.php">Not yet Registered?</a>
 				
 				<br><br>	
