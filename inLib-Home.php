@@ -115,6 +115,24 @@
 			}
 		}
 		*/
+		
+		//Storing page values into local array
+		$pageIndex = $_GET['page'];
+		//echo $pageIndex;
+		$pageTotal = ceil($_SESSION['bookcount'] / 2);
+		//echo $pageTotal;
+		$pageCont = 0;
+		for($i = 0; $i < $pageTotal; $i++){
+			for($y = 0; $y < 2; $y++){
+				$pages[$i][$y] = $pageCont;
+				echo $pages[$i][$y] . "+";
+				$pageCont++;
+				//echo "=" . $i;
+				//echo $pageCont ."-";
+			}
+			echo " ";
+			//$pageCont++;
+		}
 	?>
 
 		<!-- Content -->
@@ -124,8 +142,10 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#">--Book Title #1--</a></h2>
-								<p>Author and Date</p>
+								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
+								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
+								
+								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
 							</header>
 							<div class="info">
 								<!--
@@ -146,17 +166,20 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
 							<p>
-								<strong>Book's Synopsis</strong> There's something to be put here regarding the book's contents. This space is reserved for the synopsis. This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.This space is reserved for the synopsis.
+								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
 							</p>
+							
+							<?php $pageBookIndex;?>
+							<!-- <p><?php //echo $pageBookIndex;?></p> -->
 						</article>
-
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="#">--Book Title #2--</a></h2>
-								<p>Author and Date</p>
+								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
+								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
 							</header>
 							<div class="info">
 								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
@@ -167,27 +190,73 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
 							<p>
-								Quisque vel sapien sit amet tellus elementum ultricies. Nunc vel orci turpis. Donec id malesuada metus.
-								Nunc nulla velit, fermentum quis interdum quis, tate etiam commodo lorem ipsum dolor sit amet dolore.
-								Quisque vel sapien sit amet tellus elementum ultricies. Nunc vel orci turpis. Donec id malesuada metus.
-								Nunc nulla velit, fermentum quis interdum quis, convallis eu sapien. Integer sed ipsum ante.
+								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
 							</p>
 						</article>
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 					<!-- Pagination -->
 						<div class="pagination">
 							<!--<a href="#" class="button previous">Previous Page</a>-->
 							<div class="pages">
-								<a href="#" class="active">1</a>
-								<a href="#">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<span>&hellip;</span>
-								<a href="#">20</a>
+								<?php 
+									for($i = 1; $i <= $pageTotal; $i++){
+										if($pageTotal <= 6){
+											if($i == $pageIndex){
+												echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+											} 
+											else {
+												echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+											}
+										}
+										if($pageTotal > 6){
+											if($pageIndex >= $pageTotal-3){
+												if($i == 1){
+													echo "<a href=\"inLib-home.php?page=1\">1</a>";
+													echo "<span>&hellip;</span>";
+												}
+												else if($i = $pageIndex){
+													echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
+												}
+												else {
+													echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
+												}
+											}
+											else if($pageIndex >= 4){
+												if(($i = $pageIndex-2) || ($i = $pageIndex-1)){
+													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+												}
+												else if($i = $pageIndex){
+													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+												}
+												else if($i = $pageIndex+1){
+													echo "<span>&hellip;</span>";
+												}
+												else if($i = $pageIndex+2){
+													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
+												}
+											}
+											else if($pageIndex < 4){
+												if($i = $pageIndex){
+													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+												}
+												else if($i < 4){
+													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+												} 
+												else if($i = 4){
+													echo "<span>&hellip;</span>";
+												}
+												else if($i > 4){
+													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
+												}
+											}
+										}
+									}
+								?>
 							</div>
-							<a href="#" class="button next">Next Page</a>
+							<a href="lib-home.php?page=<?php echo $pageIndex+1;?>" class="button next">Next Page</a>
 						</div>
 
 				</div>
@@ -203,23 +272,19 @@
 					<nav id="nav">
 						<ul>
 							<li class="current"><a href="#">Latest Post</a></li>
-							<li><a href="#">Book Repo</a></li>
-							<ul>
-								<li class="sub"><a href="#">Add Book</a></li>
-								<li class="sub"><a href="#">Edit Book Details </a></li>
-								<li class="sub"><a href="#">Remove Book</a></li>
-								<li class="sub"><a href="#"></a></li>
-							</ul>
-							<li><a href="#">About RepoHub</a></li>
+							<li><a href="inLib-Search.php">Book Repo</a></li>
+							<li><a href="inLib-AddBook.php">Add Book</a></li>
+							<li><a href="lib-AboutUs.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
 				<!-- Login -->
 				<section class ="box text-style1">
 					<div class ="inner">
-						<p>Welcome to RepoHub!</p>
-						<h2><?php echo $_SESSION['userLog'];?></h2>
+						<p>Welcome to RepoHub, </p>
+						<h2><?php echo $_SESSION['id'] . "!";?></h2>
 					</div>
+					<h2><a href="lib-home.php?page=1">Logout</a></h2>
 				</section>
 				
 				<!-- Search -->
@@ -228,30 +293,23 @@
 							<input type="text" class="text" name="search" placeholder="Search" />
 						</form>
 					</section>
-
-				<!-- Text -->
-					<section class="box text-style1">
-						<div class="inner">
-							<p>
-								<strong>Striped:</strong> A free and fully responsive HTML5 site
-								template designed by <a href="http://twitter.com/ajlkn">AJ</a> for <a href="http://html5up.net/">HTML5 UP</a>
-							</p>
-						</div>
-					</section>
-
+				
+				
 				<!-- Recent Posts -->
 					<section class="box recent-posts">
 						<header>
 							<h2>Recent Posts</h2>
 						</header>
 						<ul>
-							<li><a href="#">Lorem ipsum dolor</a></li>
-							<li><a href="#">Feugiat nisl aliquam</a></li>
-							<li><a href="#">Sed dolore magna</a></li>
-							<li><a href="#">Malesuada commodo</a></li>
-							<li><a href="#">Ipsum metus nullam</a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-1;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-1];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-2;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-2];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-3;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-3];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-4;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-4];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-5;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-5];?></a></li>
 						</ul>
 					</section>
+					<br><br><br><br><br><br><br><br><br><br>
+					
 
 				<!-- Recent Comments -->
 					<section class="box recent-comments">

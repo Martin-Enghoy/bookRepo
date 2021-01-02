@@ -91,6 +91,7 @@
 		//init variables
 		$username = $password = "";
 		$userErr = $passErr = $firstErr = $lastErr = $emailErr = $institErr = $conErr = $simiErr = $occErr = "";
+		$firstLenErr = $lastLenErr = $emailLenErr = $institLenErr = $userLenErr = $passLenErr = "";
 		$addIndex = 0;
 		$pageBookIndex = 0;
 		//$addIndex = $_GET['page'];
@@ -220,7 +221,27 @@
 				$simiErr = "Password does not match!";
 				$error = 1;
 			}
-
+			
+			//Check for exceeding length
+			if(strlen($_POST["firstName"]) > 100){
+				$firstLenErr = "First Name should not exceed 100 characters!";
+			}
+			if(strlen($_POST["lastName"]) > 100){
+				$lastLenErr = "Last Name should not exceed 100 characters!";
+			}
+			if(strlen($_POST["emailAdd"]) > 100){
+				$emailLenErr = "Email Address should not exceed 100 characters!";
+			}
+			if(strlen($_POST["Institution"]) > 100){
+				$institLenErr = "Institution should not exceed 100 characters!";
+			}
+			if(strlen($_POST["passWord"]) > 30){
+				$passLenErr = "Password should not exceed 30 characters!";
+			}
+			if(strlen($_POST["userName"]) > 30){	
+				$userLenErr = "Username should not exceed 30 characters!";
+			}
+			
 
 			if($error != 1){
 				$firstn = $_POST["firstName"];
@@ -246,13 +267,13 @@
 					<header><h2>RepoHub: Registration Form</h2></header>
 					<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 						<h4>First Name: </h4>
-						<input type="text" class="text" name="firstName" placeholder="Your First Name"/><p class="error"><?php echo $firstErr; ?></p>
+						<input type="text" class="text" name="firstName" placeholder="Your First Name"/><p class="error"><?php echo $firstErr . $firstLenErr; ?></p>
 						<h4>Last Name: </h4>
-						<input type="text" class="text" name="lastName" placeholder="Your Last Name"/><p class="error"><?php echo $lastErr; ?></p>
+						<input type="text" class="text" name="lastName" placeholder="Your Last Name"/><p class="error"><?php echo $lastErr . $lastLenErr; ?></p>
 						<h4>Email Address: </h4>
-						<input type="text" class="text" name="emailAdd" placeholder="Your Email Address"/><p class="error"><?php echo $emailErr; ?></p>
+						<input type="text" class="text" name="emailAdd" placeholder="Your Email Address"/><p class="error"><?php echo $emailErr . $emailLenErr; ?></p>
 						<h4>Institution: </h4>
-						<input type="text" class="text" name="Institution" placeholder="Your School / Institution"/><p class="error"><?php echo $institErr; ?></p>
+						<input type="text" class="text" name="Institution" placeholder="Your School / Institution"/><p class="error"><?php echo $institErr . $institLenErr; ?></p>
 						<h4>Occupation: </h4>
 						<select name="class"> 
 							<option value="">--Select Occupation--</option>
@@ -260,9 +281,9 @@
 							<option value="Student">Student</option>
 						</select><?php echo $occErr; ?></p>
 						<h4>Username: </h4>
-						<input type="text" class="text" name="userName" placeholder="Your Username"/><p class="error"><?php echo $userErr; ?></p>
+						<input type="text" class="text" name="userName" placeholder="Your Username"/><p class="error"><?php echo $userErr . $userLenErr; ?></p>
 						<h4>Password: </h4>
-						<input type="password" class="text" name="passWord" placeholder="Password"/><p class="error"><?php echo $passErr; ?></p>
+						<input type="password" class="text" name="passWord" placeholder="Password"/><p class="error"><?php echo $passErr . $passLenErr; ?></p>
 						<h4>Confirm Password: </h4>
 						<input type="password" class="text" name="conPass" placeholder="Confirm"/><p class="error"><?php echo $conErr; ?></p>
 						<p class="error"><?php echo $simiErr; ?></p>
