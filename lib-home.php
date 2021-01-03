@@ -57,6 +57,9 @@
 		//session init
 		session_start();
 		
+		$_SESSION['id'] = "";
+		$_SESSION['access'] = "";
+		
 		//Putting users in array
 		while($arr = mysqli_fetch_array($recordsDB)){
 			//$records[$count]["user"] = $arr['UserName'];

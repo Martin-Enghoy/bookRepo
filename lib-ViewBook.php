@@ -88,7 +88,9 @@
 		
 		//Getting the $_SESSION values 
 		$bookIndex = $_GET['bookID'];
+		$_SESSION['bookpage'] = $_GET['bookID'];
 		
+		//echo $bookIndex;
 		//init variables
 		$username = $password = "";
 		$userErr = $passErr = "";
@@ -144,8 +146,11 @@
 				}
 			}
 			if($userVer == 1 && $passVer == 1){
-				header("Location: inLib-ViewBook.php");
-			}	
+				$_SESSION['access'] = $_SESSION['class'][$userid];
+				$_SESSION['id'] = $_SESSION['first'][$userid];
+				header("Location: inLib-ViewBook.php?bookID=$bookIndex");
+			}
+			echo $bookIndex;
 		}
 		
 	?>
@@ -268,7 +273,7 @@
 				<!-- Login -->
 				<section class ="box text-style1">
 					<div class ="inner">
-						<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+						<form method="post" action="lib-Viewbook.php?bookID=<?php echo $bookIndex;?>">
 							<p class="error"><?php echo $userErr; ?></p>
 							<input type="text" class="text" name="username" placeholder="Username"/>
 							<p class="error"><?php echo $passErr; ?></p>
