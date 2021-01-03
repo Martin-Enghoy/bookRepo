@@ -45,6 +45,11 @@
 		$recordsDB = mysqli_query($sqlconnect, "select * from admin"); //fetching data from bookrepo db
 		$count = 0;
 		
+		
+		//Get books
+		$booksDB = mysqli_query($sqlconnect, "select * from books order by dateposted desc");
+		$bookCount = 0;
+		
 		//Get books 
 		/*
 		$bookRecords = array("title"=> null, "isbn"=> null, "abstract"=> null, "series"=> null, "pubhouse"=> null, 
@@ -116,6 +121,26 @@
 		}
 		*/
 		
+		//Putting book details into array
+		while($arrB = mysqli_fetch_array($booksDB)){
+			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
+			//echo $_SESSION['bookid'][$bookCount] . " ";
+			$_SESSION['title'][$bookCount] = $arrB['Title'];
+			$_SESSION['isbn'][$bookCount] = $arrB['ISBN'];
+			$_SESSION['author'][$bookCount] = $arrB['Author'];
+			$_SESSION['cover'][$bookCount] = $arrB['Cover'];
+			$_SESSION['abstract'][$bookCount] = $arrB['Abstract'];
+			$_SESSION['series'][$bookCount] = $arrB['Series'];
+			$_SESSION['pubhouse'][$bookCount] = $arrB['PubHouse'];
+			$_SESSION['pubdate'][$bookCount] = $arrB['PubDate'];
+			$_SESSION['country'][$bookCount] = $arrB['Country'];
+			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
+			$bookCount++;
+		}
+		
+		//init of bookCount to pass
+		$_SESSION['bookcount'] = $bookCount;
+		
 		//Storing page values into local array
 		$pageIndex = $_GET['page'];
 		//echo $pageIndex;
@@ -142,7 +167,7 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
+								<h2><a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
 								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
 								
 								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
@@ -166,7 +191,7 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
+							<a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
 							<p>
 								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
 							</p>
@@ -178,7 +203,7 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
+								<h2><a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
 								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
 							</header>
 							<div class="info">
@@ -190,7 +215,7 @@
 									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
 								</ul>
 							</div>
-							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
+							<a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
 							<p>
 								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
 							</p>
@@ -205,10 +230,10 @@
 									for($i = 1; $i <= $pageTotal; $i++){
 										if($pageTotal <= 6){
 											if($i == $pageIndex){
-												echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+												echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
 											} 
 											else {
-												echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+												echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
 											}
 										}
 										if($pageTotal > 6){
@@ -226,37 +251,37 @@
 											}
 											else if($pageIndex >= 4){
 												if(($i = $pageIndex-2) || ($i = $pageIndex-1)){
-													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+													echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
 												}
 												else if($i = $pageIndex){
-													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+													echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
 												}
 												else if($i = $pageIndex+1){
 													echo "<span>&hellip;</span>";
 												}
 												else if($i = $pageIndex+2){
-													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
+													echo "<a href=\"inLib-home.php?page=$pageTotal\">$pageTotal</a>";
 												}
 											}
 											else if($pageIndex < 4){
 												if($i = $pageIndex){
-													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
+													echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
 												}
 												else if($i < 4){
-													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
+													echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
 												} 
 												else if($i = 4){
 													echo "<span>&hellip;</span>";
 												}
 												else if($i > 4){
-													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
+													echo "<a href=\"inLib-home.php?page=$pageTotal\">$pageTotal</a>";
 												}
 											}
 										}
 									}
 								?>
 							</div>
-							<a href="lib-home.php?page=<?php echo $pageIndex+1;?>" class="button next">Next Page</a>
+							<a href="inLib-home.php?page=<?php echo $pageIndex+1;?>" class="button next">Next Page</a>
 						</div>
 
 				</div>
@@ -280,6 +305,7 @@
 
 				<!-- Login -->
 				<section class ="box text-style1">
+				<br>
 					<div class ="inner">
 						<p>Welcome to RepoHub, </p>
 						<h2><?php echo $_SESSION['id'] . "!";?></h2>
@@ -289,6 +315,7 @@
 				
 				<!-- Search -->
 					<section class="box search">
+					<br><br>
 						<form method="post" action="#">
 							<input type="text" class="text" name="search" placeholder="Search" />
 						</form>

@@ -153,8 +153,10 @@
 						echo "Failure!";
 					}
 					*/
-
+					
 				}
+				echo "<script>alert('Book successfully added to RepoHub! Thank you for your contribution!')</script>";
+				header("Location: inLib-Home.php?page=1");
 				mysqli_close($sqlconnect);
 			}
 		

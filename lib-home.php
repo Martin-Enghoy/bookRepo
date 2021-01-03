@@ -317,7 +317,7 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="#">Latest Post</a></li>
+							<li class="current"><a href="lib-home.php?page=1">Latest Post</a></li>
 							<li><a href="lib-bookRepo.php">Book Repo</a></li>
 							<li><a href="lib-AboutRepoHub.php">About RepoHub</a></li>
 						</ul>

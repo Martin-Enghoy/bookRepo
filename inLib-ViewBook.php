@@ -45,11 +45,11 @@
 		$recordsDB = mysqli_query($sqlconnect, "select * from admin"); //fetching data from bookrepo db
 		$count = 0;
 		
-		/*
+		
 		//Get books
 		$booksDB = mysqli_query($sqlconnect, "select * from books order by dateposted desc limit 1");
 		$bookCount = 0;
-		*/
+		
 		
 		//Get books 
 		/*
@@ -68,7 +68,7 @@
 			$count++;
 		}
 		
-		/*
+		
 		//Putting book details into array
 		while($arrB = mysqli_fetch_array($booksDB)){
 			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
@@ -84,7 +84,7 @@
 			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
 			$bookCount++;
 		}
-		*/
+		
 		
 		//Getting the $_SESSION values 
 		$bookIndex = $_GET['bookID'];
@@ -155,61 +155,70 @@
 				<div class="inner">
 
 					<!-- Post -->
-						<article class="box post post-excerpt">
-							<header>
-								<h2><a href="#"><?php echo $_SESSION['title'][$bookIndex];?></a></h2>
-								
-								<p><?php echo $_SESSION['author'][$bookIndex];?> | <?php echo $_SESSION['pubdate'][$bookIndex];?></p>
-							</header>
-							<!--
-							<div class="info">
+					<section>
+							<article class="box post post-excerpt">
+								<header>
+									<h2><a href="#"><?php echo $_SESSION['title'][$bookIndex];?></a></h2>
+									
+									<p><?php echo $_SESSION['author'][$bookIndex];?> | <?php echo $_SESSION['pubdate'][$bookIndex];?></p>
+								</header>
 								<!--
-									Note: The date should be formatted exactly as it's shown below. In particular, the
-									"least significant" characters of the month should be encapsulated in a <span>
-									element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
-									Oh, and if you don't need a date for a particular page or post you can simply delete
-									the entire "date" element.
+								<div class="info">
+									<!--
+										Note: The date should be formatted exactly as it's shown below. In particular, the
+										"least significant" characters of the month should be encapsulated in a <span>
+										element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
+										Oh, and if you don't need a date for a particular page or post you can simply delete
+										the entire "date" element.
+									
+									<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
+									<!--
+										Note: You can change the number of list items in "stats" to whatever you want.
+									
+									<ul class="stats">
+										<li><a href="#" class="icon fa-comment">16</a></li>
+										<li><a href="#" class="icon fa-heart">32</a></li>
+										<li><a href="#" class="icon brands fa-twitter">64</a></li>
+										<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
+									</ul>
+								</div>
+								-->
+								<h3>
+									<b>ISBN: </b><?php echo $_SESSION['isbn'][$bookIndex];?>
+								</h3>
+								<div class="box">
+								<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$bookIndex]?>"  alt="" /></a>
+								</div>
+								<p>
+									<?php echo $_SESSION['abstract'][$bookIndex];?>
+								</p>
+								<p>
+									<b>Series: </b><?php echo $_SESSION['series'][$bookIndex];?>
+								</p>
+								<p>
+									<b>Publishing House: </b><?php echo $_SESSION['pubhouse'][$bookIndex];?>
+								</p>
+								<p>
+									<b>Publishing Date: </b><?php echo $_SESSION['pubdate'][$bookIndex];?>
+								</p>
+								<p>
+									<b>Country: </b><?php echo $_SESSION['country'][$bookIndex];?>
+								</p>
+								<p>
+									<b>Date Posted: </b><?php echo $_SESSION['date'][$bookIndex];?>
+								</p>
 								
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
-								<!--
-									Note: You can change the number of list items in "stats" to whatever you want.
-								
-								<ul class="stats">
-									<li><a href="#" class="icon fa-comment">16</a></li>
-									<li><a href="#" class="icon fa-heart">32</a></li>
-									<li><a href="#" class="icon brands fa-twitter">64</a></li>
-									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
-								</ul>
-							</div>
-							-->
-							<h3>
-								<b>ISBN: </b><?php echo $_SESSION['isbn'][$bookIndex];?>
-							</h3>
-							<div class="box">
-							<a href="#" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$bookIndex]?>"  alt="" /></a>
-							</div>
-							<p>
-								<?php echo $_SESSION['abstract'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Series: </b><?php echo $_SESSION['series'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Publishing House: </b><?php echo $_SESSION['pubhouse'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Publishing Date: </b><?php echo $_SESSION['pubdate'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Country: </b><?php echo $_SESSION['country'][$bookIndex];?>
-							</p>
-							<p>
-								<b>Date Posted: </b><?php echo $_SESSION['date'][$bookIndex];?>
-							</p>
-							
-							<?php //$pageBookIndex++;?>
-							<!-- <p><?php //echo $pageBookIndex;?></p> -->
-						</article>
+								<?php //$pageBookIndex++;?>
+								<!-- <p><?php //echo $pageBookIndex;?></p> -->
+							</article>
+						</section>
+						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+						<!-- Edit Button -->
+						<section>
+							<a href="inLib-EditBook.php?bookID=<?php echo $bookIndex;?>">
+								<input type="submit" id="Submit" name="submit" value="Edit Book"/>
+							</a>
+						</section>
 
 					<!-- Post 
 						<article class="box post post-excerpt">
@@ -259,30 +268,25 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class=""><a href="lib-home.php?page=1">Latest Post</a></li>
-							<li><a href="#">Book Repo</a></li>
-							<li><a href="#">Add Book</a></li>
-							<li><a href="#">About RepoHub</a></li>
+							<li><a href="inLib-Home.php?page=1">Latest Post</a></li>
+							<li><a href="inLib-SearchBook.php">Book Repo</a></li>
+							<li><a href="inLib-AddBook.php">Add Book</a></li>
+							<li><a href="inLib-AboutUs.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
 				<!-- Login -->
-				<section class ="box text-style1">
-					<div class ="inner">
-						<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-							<p class="error"><?php echo $userErr; ?></p>
-							<input type="text" class="text" name="username" placeholder="Username"/>
-							<p class="error"><?php echo $passErr; ?></p>
-							<input type="password" class="text" name="password" placeholder="Password"/>
-							<br>
-							<input type="submit" value="Login"/>
-						</form> 
+					<section class ="box text-style1">
+						<div class ="inner">
+							<p>Welcome to RepoHub, </p>
+							<h2><?php echo $_SESSION['id'] . "!";?></h2>
+						</div>
+						<h2><a href="lib-home.php?page=1">Logout</a></h2>
 						<?php 
 							//if($userVer == 1 && $passVer == 1){
 							//	header("Location: inLib-Home.php");
 							//}
-						?>
-					</div>
+						?>	
 				</section>
 				
 				<!-- Search -->
@@ -298,11 +302,11 @@
 							<h2>Recent Posts</h2>
 						</header>
 						<ul>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-1;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-1];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-2;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-2];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-3;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-3];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-4;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-4];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-5;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-5];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-1;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-1];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-2;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-2];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-3;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-3];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-4;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-4];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-5;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-5];?></a></li>
 						</ul>
 					</section>
 				<br><br><br><br><br><br><br><br><br><br>

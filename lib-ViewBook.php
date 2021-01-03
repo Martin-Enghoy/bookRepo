@@ -254,15 +254,14 @@
 			<div id="sidebar">
 
 				<!-- Logo -->
-					<h1 id="logo"><a href="#">RepoHub</a></h1>
+					<h1 id="logo"><a href="lib-home.php?page=1">RepoHub</a></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
 							<li class=""><a href="lib-home.php?page=1">Latest Post</a></li>
 							<li><a href="#">Book Repo</a></li>
-							<li><a href="#">Add Book</a></li>
-							<li><a href="#">About RepoHub</a></li>
+							<li><a href="lib-AboutUs.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
@@ -284,7 +283,10 @@
 						?>
 					</div>
 				</section>
+				<br><br>				
+				<a href="lib-reg.php">Not yet Registered?</a>
 				
+				<br><br>
 				<!-- Search -->
 					<section class="box search">
 						<form method="post" action="#">
