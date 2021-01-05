@@ -103,6 +103,7 @@
 		
 		//Error check and catch
 		if($_SERVER["REQUEST_METHOD"]=="POST"){
+			/*
 			//Input Check
 			if(empty($_POST["username"])){
 				$userErr = "Please input your Username!";
@@ -145,8 +146,10 @@
 			}
 			if($userVer == 1 && $passVer == 1){
 				header("Location: inLib-ViewBook.php");
-			}	
+			}
+			*/			
 		}
+		
 		
 	?>
 
@@ -218,6 +221,13 @@
 							<a href="inLib-EditBook.php?bookID=<?php echo $bookIndex;?>">
 								<input type="submit" id="Submit" name="submit" value="Edit Book"/>
 							</a>
+							<?php if($_SESSION['access'] == "Admin"){
+							echo "<form method=\"post\" action=\"inLib-DeleteBook.php?bookID=" . $bookIndex . "\" onsubmit=\"return confirm('Are you sure you want to delete " . $_SESSION['title'][$bookIndex] . "');\">
+							<br>
+								<input type=\"submit\" id=\"Submit\" name=\"delete\" value=\"Delete Book\"/>
+							</form>";
+							}
+							?>
 						</section>
 
 					<!-- Post 

@@ -151,6 +151,7 @@
 				header("Location: inLib-ViewBook.php?bookID=$bookIndex");
 			}
 			echo $bookIndex;
+			echo $_SESSION['bookpage'];
 		}
 		
 	?>
