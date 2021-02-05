@@ -186,28 +186,11 @@
 								
 								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
 							</header>
-							<div class="info">
-								<!--
-									Note: The date should be formatted exactly as it's shown below. In particular, the
-									"least significant" characters of the month should be encapsulated in a <span>
-									element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
-									Oh, and if you don't need a date for a particular page or post you can simply delete
-									the entire "date" element.
-								-->
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
-								<!--
-									Note: You can change the number of list items in "stats" to whatever you want.
-								-->
-								<ul class="stats">
-									<li><a href="#" class="icon fa-comment">16</a></li>
-									<li><a href="#" class="icon fa-heart">32</a></li>
-									<li><a href="#" class="icon brands fa-twitter">64</a></li>
-									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
-								</ul>
-							</div>
 							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
 							<p>
 								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
+							</p>
+							<p>Posted on: <?php echo $_SESSION['date'][$pages[$pageIndex-1][0]];?>
 							</p>
 							
 							<?php $pageBookIndex;?>
@@ -220,18 +203,11 @@
 								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
 								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
 							</header>
-							<div class="info">
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
-								<ul class="stats">
-									<li><a href="#" class="icon fa-comment">16</a></li>
-									<li><a href="#" class="icon fa-heart">32</a></li>
-									<li><a href="#" class="icon brands fa-twitter">64</a></li>
-									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
-								</ul>
-							</div>
 							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
 							<p>
 								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
+							</p>
+							<p>Posted on: <?php echo $_SESSION['date'][$pages[$pageIndex-1][1]];?>
 							</p>
 						</article>
 					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -350,9 +326,19 @@
 				<br><br>	
 				<!-- Search -->
 					<section class="box search">
-					<br><br>
-						<form method="post" action="#">
+						<form method="get" action="inLib-SearchBook.php">
+							<select id="Category" name="Category" class="form-control">
+								<option value="Title">Title</option>
+								<option value="ISBN">ISBN</option>
+								<option value="Author">Author</option>
+								<option value="Series">Series</option>
+								<option value="PubHouse">PubHouse</option>
+								<option value="Country">Country</option>
+							</select>
+							<br>
 							<input type="text" class="text" name="search" placeholder="Search" />
+							<br>
+							<input type="submit" id="Submit" value="Search Book"/>
 						</form>
 					</section>
 
@@ -385,67 +371,6 @@
 					</section>
 				-->
 
-				<!-- Calendar -->
-					<section class="box calendar">
-						<div class="inner">
-							<table>
-								<caption>July 2014</caption>
-								<thead>
-									<tr>
-										<th scope="col" title="Monday">M</th>
-										<th scope="col" title="Tuesday">T</th>
-										<th scope="col" title="Wednesday">W</th>
-										<th scope="col" title="Thursday">T</th>
-										<th scope="col" title="Friday">F</th>
-										<th scope="col" title="Saturday">S</th>
-										<th scope="col" title="Sunday">S</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="4" class="pad"><span>&nbsp;</span></td>
-										<td><span>1</span></td>
-										<td><span>2</span></td>
-										<td><span>3</span></td>
-									</tr>
-									<tr>
-										<td><span>4</span></td>
-										<td><span>5</span></td>
-										<td><a href="#">6</a></td>
-										<td><span>7</span></td>
-										<td><span>8</span></td>
-										<td><span>9</span></td>
-										<td><a href="#">10</a></td>
-									</tr>
-									<tr>
-										<td><span>11</span></td>
-										<td><span>12</span></td>
-										<td><span>13</span></td>
-										<td class="today"><a href="#">14</a></td>
-										<td><span>15</span></td>
-										<td><span>16</span></td>
-										<td><span>17</span></td>
-									</tr>
-									<tr>
-										<td><span>18</span></td>
-										<td><span>19</span></td>
-										<td><span>20</span></td>
-										<td><span>21</span></td>
-										<td><span>22</span></td>
-										<td><a href="#">23</a></td>
-										<td><span>24</span></td>
-									</tr>
-									<tr>
-										<td><a href="#">25</a></td>
-										<td><span>26</span></td>
-										<td><span>27</span></td>
-										<td><span>28</span></td>
-										<td class="pad" colspan="3"><span>&nbsp;</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</section>
 
 				<!-- Copyright -->
 					<ul id="copyright">

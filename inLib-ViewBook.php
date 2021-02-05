@@ -70,6 +70,7 @@
 		
 		
 		//Putting book details into array
+		/*
 		while($arrB = mysqli_fetch_array($booksDB)){
 			$_SESSION['bookid'][$bookCount] = $arrB['bookID'];
 			$_SESSION['title'][$bookCount] = $arrB['Title'];
@@ -84,10 +85,12 @@
 			$_SESSION['date'][$bookCount] = $arrB['DatePosted'];
 			$bookCount++;
 		}
+		*/
 		
 		
 		//Getting the $_SESSION values 
 		$bookIndex = $_GET['bookID'];
+		
 		
 		//init variables
 		$username = $password = "";
