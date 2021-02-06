@@ -154,30 +154,43 @@
 		<!-- Sidebar -->
 			<div id="sidebar">
 
-				<!-- Logo -->	
-					<h1 id="logo"><a href="inLib-Home.php?page=1">RepoHub</a></h1>
+				<!-- Logo -->
+					<h1 id="logo"><a href="lib-home.php?page=1">RepoHub</a></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="inLib-Home.php?page=1">Latest Post</a></li>
-							<li><a href="inLib-AddBook.php">Add Book</a></li>
-							<li><a href="inLib-About.php">About RepoHub</a></li>
+							<li><a href="lib-home.php?page=1">Latest Post</a></li>
+							<li><a href="lib-About.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
 				<!-- Login -->
 				<section class ="box text-style1">
 					<div class ="inner">
-						<p>Welcome to RepoHub, </p>
-						<h2><?php echo $_SESSION['id'] . "!";?></h2>
+						<form method="post" action="lib-home.php?page=1">
+						<?php //echo htmlspecialchars($_SERVER['PHP_SELF']);?>
+							<input type="text" class="text" name="username" placeholder="Username"/>
+							<p class="error"><?php echo $userErr; ?></p>
+							<input type="password" class="text" name="password" placeholder="Password"/>
+							<p class="error"><?php echo $passErr; ?></p>
+							<input type="submit" value="Login"/>
+						</form> 
+						<?php 
+							//if($userVer == 1 && $passVer == 1){
+							//	header("Location: inLib-Home.php");
+							//}
+						?>
 					</div>
-					<h2><a href="lib-home.php?page=1">Logout</a></h2>
 				</section>
+				<br><br>				
+				<a href="lib-reg.php">Not yet Registered?</a>
+				
+				<br><br>
 				
 				<!-- Search -->
 					<section class="box search">
-						<form method="get" action="inLib-SearchBook.php">
+						<form method="get" action="lib-SearchBook.php">
 							<select id="Category" name="Category" class="form-control">
 								<option value="Title">Title</option>
 								<option value="ISBN">ISBN</option>

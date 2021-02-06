@@ -446,9 +446,8 @@
 					<nav id="nav">
 						<ul>
 							<li><a href="inLib-Home.php?page=1">Latest Post</a></li>
-							<li><a href="inLib-Search.php">Book Repo</a></li>
 							<li class="current"><a href="inLib-AddBook.php">Add Book</a></li>
-							<li><a href="lib-AboutUs.php">About RepoHub</a></li>
+							<li><a href="inLib-About.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
@@ -463,8 +462,19 @@
 				
 				<!-- Search -->
 					<section class="box search">
-						<form method="post" action="#">
+						<form method="get" action="inLib-SearchBook.php">
+							<select id="Category" name="Category" class="form-control">
+								<option value="Title">Title</option>
+								<option value="ISBN">ISBN</option>
+								<option value="Author">Author</option>
+								<option value="Series">Series</option>
+								<option value="PubHouse">PubHouse</option>
+								<option value="Country">Country</option>
+							</select>
+							<br>
 							<input type="text" class="text" name="search" placeholder="Search" />
+							<br>
+							<input type="submit" id="Submit" value="Search Book"/>
 						</form>
 					</section>
 				
@@ -475,89 +485,14 @@
 							<h2>Recent Posts</h2>
 						</header>
 						<ul>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-1;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-1];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-2;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-2];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-3;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-3];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-4;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-4];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-5;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-5];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=0"><?php echo $_SESSION['title'][0];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=1"><?php echo $_SESSION['title'][1];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=2"><?php echo $_SESSION['title'][2];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=3"><?php echo $_SESSION['title'][3];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=4"><?php echo $_SESSION['title'][4];?></a></li>
 						</ul>
 					</section>
-					<br><br><br><br><br><br><br><br><br><br>
-					
-
-				<!-- Recent Comments -->
-					<section class="box recent-comments">
-						<header>
-							<h2>Recent Comments</h2>
-						</header>
-						<ul>
-							<li>case on <a href="#">Lorem ipsum dolor</a></li>
-							<li>molly on <a href="#">Sed dolore magna</a></li>
-							<li>case on <a href="#">Sed dolore magna</a></li>
-						</ul>
-					</section>
-
-				<!-- Calendar -->
-					<section class="box calendar">
-						<div class="inner">
-							<table>
-								<caption>July 2014</caption>
-								<thead>
-									<tr>
-										<th scope="col" title="Monday">M</th>
-										<th scope="col" title="Tuesday">T</th>
-										<th scope="col" title="Wednesday">W</th>
-										<th scope="col" title="Thursday">T</th>
-										<th scope="col" title="Friday">F</th>
-										<th scope="col" title="Saturday">S</th>
-										<th scope="col" title="Sunday">S</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="4" class="pad"><span>&nbsp;</span></td>
-										<td><span>1</span></td>
-										<td><span>2</span></td>
-										<td><span>3</span></td>
-									</tr>
-									<tr>
-										<td><span>4</span></td>
-										<td><span>5</span></td>
-										<td><a href="#">6</a></td>
-										<td><span>7</span></td>
-										<td><span>8</span></td>
-										<td><span>9</span></td>
-										<td><a href="#">10</a></td>
-									</tr>
-									<tr>
-										<td><span>11</span></td>
-										<td><span>12</span></td>
-										<td><span>13</span></td>
-										<td class="today"><a href="#">14</a></td>
-										<td><span>15</span></td>
-										<td><span>16</span></td>
-										<td><span>17</span></td>
-									</tr>
-									<tr>
-										<td><span>18</span></td>
-										<td><span>19</span></td>
-										<td><span>20</span></td>
-										<td><span>21</span></td>
-										<td><span>22</span></td>
-										<td><a href="#">23</a></td>
-										<td><span>24</span></td>
-									</tr>
-									<tr>
-										<td><a href="#">25</a></td>
-										<td><span>26</span></td>
-										<td><span>27</span></td>
-										<td><span>28</span></td>
-										<td class="pad" colspan="3"><span>&nbsp;</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</section>
+					<br><br><br><br><br>
 
 				<!-- Copyright -->
 					<ul id="copyright">

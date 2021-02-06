@@ -142,7 +142,7 @@
 		$_SESSION['bookcount'] = $bookCount;
 		
 		//Storing page values into local array
-		$pageIndex = $_GET['page'];
+		//$pageIndex = $_GET['page'];
 		//echo $pageIndex;
 		$pageTotal = ceil($_SESSION['bookcount'] / 2);
 		//echo $pageTotal;
@@ -150,7 +150,7 @@
 		for($i = 0; $i < $pageTotal; $i++){
 			for($y = 0; $y < 2; $y++){
 				$pages[$i][$y] = $pageCont;
-				echo $pages[$i][$y] . "+";
+				//echo $pages[$i][$y] . "+";
 				$pageCont++;
 				//echo "=" . $i;
 				//echo $pageCont ."-";
@@ -167,123 +167,27 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
-								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
-								
-								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
+								<h2>RepoHub: About Us</h2>
 							</header>
-							<div class="info">
-								<!--
-									Note: The date should be formatted exactly as it's shown below. In particular, the
-									"least significant" characters of the month should be encapsulated in a <span>
-									element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
-									Oh, and if you don't need a date for a particular page or post you can simply delete
-									the entire "date" element.
-								-->
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
-								<!--
-									Note: You can change the number of list items in "stats" to whatever you want.
-								-->
-								<ul class="stats">
-									<li><a href="#" class="icon fa-comment">16</a></li>
-									<li><a href="#" class="icon fa-heart">32</a></li>
-									<li><a href="#" class="icon brands fa-twitter">64</a></li>
-									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
-								</ul>
-							</div>
-							<a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
+								<b>RepoHub</b> is a student-driven initiative to bring a book repository online and available to anyone and everyone. The academic community is very diverse as well as it's fiction, digests and fun reads.
+
+								The purpose of Repohub is to give each member of the academic community a quick stop to acquaint themselves with a particular piece of reading material. Currently, the website doesn't support acquiring the feedback of each user. However, it'll soon boast reviews and ratings for each uploaded piece.
+
+								
+
+								
 							</p>
 							
-							<?php $pageBookIndex;?>
-							<!-- <p><?php //echo $pageBookIndex;?></p> -->
-						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<!-- Post -->
-						<article class="box post post-excerpt">
-							<header>
-								<h2><a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
-								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
-							</header>
-							<div class="info">
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">9</span><span class="year">, 2014</span></span>
-								<ul class="stats">
-									<li><a href="#" class="icon fa-comment">16</a></li>
-									<li><a href="#" class="icon fa-heart">32</a></li>
-									<li><a href="#" class="icon brands fa-twitter">64</a></li>
-									<li><a href="#" class="icon brands fa-facebook-f">128</a></li>
-								</ul>
-							</div>
-							<a href="inLib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
-							<p>
-								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
-							</p>
-						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-					<!-- Pagination -->
-						<div class="pagination">
-							<!--<a href="#" class="button previous">Previous Page</a>-->
-							<div class="pages">
-								<?php 
-									for($i = 1; $i <= $pageTotal; $i++){
-										if($pageTotal <= 6){
-											if($i == $pageIndex){
-												echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
-											} 
-											else {
-												echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
-											}
-										}
-										if($pageTotal > 6){
-											if($pageIndex >= $pageTotal-3){
-												if($i == 1){
-													echo "<a href=\"inLib-home.php?page=1\">1</a>";
-													echo "<span>&hellip;</span>";
-												}
-												else if($i = $pageIndex){
-													echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
-												}
-												else {
-													echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
-												}
-											}
-											else if($pageIndex >= 4){
-												if(($i = $pageIndex-2) || ($i = $pageIndex-1)){
-													echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
-												}
-												else if($i = $pageIndex){
-													echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
-												}
-												else if($i = $pageIndex+1){
-													echo "<span>&hellip;</span>";
-												}
-												else if($i = $pageIndex+2){
-													echo "<a href=\"inLib-home.php?page=$pageTotal\">$pageTotal</a>";
-												}
-											}
-											else if($pageIndex < 4){
-												if($i = $pageIndex){
-													echo "<a href=\"inLib-home.php?page=$i\" class=\"active\">$i</a>";
-												}
-												else if($i < 4){
-													echo "<a href=\"inLib-home.php?page=$i\">$i</a>";
-												} 
-												else if($i = 4){
-													echo "<span>&hellip;</span>";
-												}
-												else if($i > 4){
-													echo "<a href=\"inLib-home.php?page=$pageTotal\">$pageTotal</a>";
-												}
-											}
-										}
-									}
-								?>
-							</div>
-							<a href="inLib-home.php?page=<?php echo $pageIndex+1;?>" class="button next">Next Page</a>
-						</div>
-
+							<h1>Created by: Jan Luis Antoc & Martin Adrian Enghoy </h1>
+							
+							<br>
+							
+							<em> "Education is the most powerful weapon which you can use to change the world."
+								- Nelson Mandela
+							</em>
+							
+							
 				</div>
 			</div>
 
@@ -296,10 +200,9 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="#">Latest Post</a></li>
-							<li><a href="inLib-Search.php">Book Repo</a></li>
+							<li><a href="inLib-Home.php?page=1">Latest Post</a></li>
 							<li><a href="inLib-AddBook.php">Add Book</a></li>
-							<li><a href="lib-AboutUs.php">About RepoHub</a></li>
+							<li class="current"><a href="#">About RepoHub</a></li>
 						</ul>
 					</nav>
 
@@ -338,90 +241,14 @@
 							<h2>Recent Posts</h2>
 						</header>
 						<ul>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-1;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-1];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-2;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-2];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-3;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-3];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-4;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-4];?></a></li>
-							<li><a href="inLib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-5;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-5];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=0"><?php echo $_SESSION['title'][0];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=1"><?php echo $_SESSION['title'][1];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=2"><?php echo $_SESSION['title'][2];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=3"><?php echo $_SESSION['title'][3];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=4"><?php echo $_SESSION['title'][4];?></a></li>
 						</ul>
 					</section>
-					<br><br><br><br><br><br><br><br><br><br>
-					
-
-				<!-- Recent Comments -->
-					<section class="box recent-comments">
-						<header>
-							<h2>Recent Comments</h2>
-						</header>
-						<ul>
-							<li>case on <a href="#">Lorem ipsum dolor</a></li>
-							<li>molly on <a href="#">Sed dolore magna</a></li>
-							<li>case on <a href="#">Sed dolore magna</a></li>
-						</ul>
-					</section>
-
-				<!-- Calendar -->
-					<section class="box calendar">
-						<div class="inner">
-							<table>
-								<caption>July 2014</caption>
-								<thead>
-									<tr>
-										<th scope="col" title="Monday">M</th>
-										<th scope="col" title="Tuesday">T</th>
-										<th scope="col" title="Wednesday">W</th>
-										<th scope="col" title="Thursday">T</th>
-										<th scope="col" title="Friday">F</th>
-										<th scope="col" title="Saturday">S</th>
-										<th scope="col" title="Sunday">S</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="4" class="pad"><span>&nbsp;</span></td>
-										<td><span>1</span></td>
-										<td><span>2</span></td>
-										<td><span>3</span></td>
-									</tr>
-									<tr>
-										<td><span>4</span></td>
-										<td><span>5</span></td>
-										<td><a href="#">6</a></td>
-										<td><span>7</span></td>
-										<td><span>8</span></td>
-										<td><span>9</span></td>
-										<td><a href="#">10</a></td>
-									</tr>
-									<tr>
-										<td><span>11</span></td>
-										<td><span>12</span></td>
-										<td><span>13</span></td>
-										<td class="today"><a href="#">14</a></td>
-										<td><span>15</span></td>
-										<td><span>16</span></td>
-										<td><span>17</span></td>
-									</tr>
-									<tr>
-										<td><span>18</span></td>
-										<td><span>19</span></td>
-										<td><span>20</span></td>
-										<td><span>21</span></td>
-										<td><span>22</span></td>
-										<td><a href="#">23</a></td>
-										<td><span>24</span></td>
-									</tr>
-									<tr>
-										<td><a href="#">25</a></td>
-										<td><span>26</span></td>
-										<td><span>27</span></td>
-										<td><span>28</span></td>
-										<td class="pad" colspan="3"><span>&nbsp;</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</section>
-
+										
 				<!-- Copyright -->
 					<ul id="copyright">
 						<li>&copy; LBYCPG2</li><li>Design: Antoc, Jan Luis and Enghoy, Martin Adrian</a></li>

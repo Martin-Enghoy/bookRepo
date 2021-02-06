@@ -181,105 +181,25 @@
 					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
-								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][0]];?></a></h2>
-								<!-- <p><?php //echo $pageBookIndex;?></p>  -->
-								
-								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][0]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][0]];?></p>
+								<h2>RepoHub: About Us</h2>
 							</header>
-							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][0];?>" class="image centered"><img src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][0]]?>"  alt="" /></a>
 							<p>
-								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][0]];?>
+								<b>RepoHub</b> is a student-driven initiative to bring a book repository online and available to anyone and everyone. The academic community is very diverse as well as it's fiction, digests and fun reads.
+
+								The purpose of Repohub is to give each member of the academic community a quick stop to acquaint themselves with a particular piece of reading material. Currently, the website doesn't support acquiring the feedback of each user. However, it'll soon boast reviews and ratings for each uploaded piece.
+
+								
+
+								
 							</p>
 							
-							<?php $pageBookIndex;?>
-							<!-- <p><?php //echo $pageBookIndex;?></p> -->
-						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<!-- Post -->
-						<article class="box post post-excerpt">
-							<header>
-								<h2><a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>"><?php echo $_SESSION['title'][$pages[$pageIndex-1][1]];?></a></h2>
-								<p><?php echo $_SESSION['author'][$pages[$pageIndex-1][1]];?> | <?php echo $_SESSION['pubdate'][$pages[$pageIndex-1][1]];?></p>
-							</header>
-							<a href="lib-ViewBook.php?bookID=<?php echo $pages[$pageIndex-1][1];?>" class="image centered"><img class="image centered" src="<?php echo "images/" . $_SESSION['cover'][$pages[$pageIndex-1][1]]?>" alt="" /></a>
-							<p>
-								<?php echo $_SESSION['abstract'][$pages[$pageIndex-1][1]];?>
-							</p>
-							<p>Posted on: <?php echo $_SESSION['date'][$pages[$pageIndex-1][1]];?></p>
-						</article>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-					<!-- Pagination -->
-						<div class="pagination">
-							<!--<a href="#" class="button previous">Previous Page</a>-->
-							<div class="pages">
-								<?php 
-									//echo $pageTotal . " ";
-									//echo $pageIndex . " ";
-									for($i = 1; $i <= $pageTotal; $i++){
-										if($pageTotal <= 6){
-											if($i == $pageIndex){
-												echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
-											} 
-											else {
-												echo "<a href=\"lib-home.php?page=$i\">$i</a>";
-											}
-										}
-										else if($pageTotal > 6){
-											if($pageIndex >= $pageTotal-3){
-												if($i == 1){
-													echo "<a href=\"lib-home.php?page=1\">1</a>";
-													echo "<span>&hellip;</span>";
-												}
-												else if($i == $pageIndex){
-													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
-												}
-												else {
-													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
-												}
-											}
-											else if($pageIndex >= 4){
-												if(($i == $pageIndex-2) || ($i == $pageIndex-1)){
-													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
-												}
-												else if($i == $pageIndex){
-													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
-												}
-												else if($i == $pageIndex+1){
-													echo "<span>&hellip;</span>";
-												}
-												else if($i == $pageIndex+2){
-													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
-												}
-											}
-											else if($pageIndex < 4){
-												if($i == $pageIndex){ //1
-													echo "<a href=\"lib-home.php?page=$i\" class=\"active\">$i</a>";
-												} 
-												//echo $i;
-												else if($i < 5){
-													echo "<a href=\"lib-home.php?page=$i\">$i</a>";
-												} 
-												else if($i == 5){
-													echo "<span>&hellip;</span>";
-												}
-												else if($i == 6){
-													echo "<a href=\"lib-home.php?page=$pageTotal\">$pageTotal</a>";
-												}
-											}
-										}
-									}
-								?>
-								<!--
-								<a href="lib-home.php?page=1" class="active">1</a>
-								<a href="lib-home.php?page=2">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<span>&hellip;</span>
-								<a href="#">20</a>
-								-->
-							</div>
-							<a href="lib-home.php?page=<?php echo $pageIndex+1;?>" class="button next">Next Page</a>
-						</div>
+							<h1>Created by: Jan Luis Antoc & Martin Adrian Enghoy </h1>
+							
+							<br>
+							
+							<em> "Education is the most powerful weapon which you can use to change the world."
+								- Nelson Mandela
+							</em>
 
 				</div>
 			</div>
@@ -288,14 +208,13 @@
 			<div id="sidebar">
 
 				<!-- Logo -->
-					<h1 id="logo"><a href="#">RepoHub</a></h1>
+					<h1 id="logo"><a href="lib-home.php?page=1">RepoHub</a></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="lib-home.php?page=1">Latest Post</a></li>
-							<li><a href="lib-bookRepo.php">Book Repo</a></li>
-							<li><a href="lib-AboutRepoHub.php">About RepoHub</a></li>
+							<li><a href="lib-home.php?page=1">Latest Post</a></li>
+							<li  class="current"><a href="lib-About.php">About RepoHub</a></li>
 						</ul>
 					</nav>
 
@@ -324,25 +243,36 @@
 				<!-- Search -->
 					<section class="box search">
 					<br><br>
-						<form method="post" action="#">
+						<form method="get" action="lib-SearchBook.php">
+							<select id="Category" name="Category" class="form-control">
+								<option value="Title">Title</option>
+								<option value="ISBN">ISBN</option>
+								<option value="Author">Author</option>
+								<option value="Series">Series</option>
+								<option value="PubHouse">PubHouse</option>
+								<option value="Country">Country</option>
+							</select>
+							<br>
 							<input type="text" class="text" name="search" placeholder="Search" />
+							<br>
+							<input type="submit" id="Submit" value="Search Book"/>
 						</form>
 					</section>
 
 				<!-- Recent Posts -->
 					<section class="box recent-posts">
 						<header>
-							<h2>Recent Posts</h2>
+							<h2>Recent Uploads</h2>
 						</header>
 						<ul>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-1;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-1];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-2;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-2];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-3;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-3];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-4;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-4];?></a></li>
-							<li><a href="lib-ViewBook.php?bookID=<?php echo $_SESSION['bookcount']-5;?>"><?php echo $_SESSION['title'][$_SESSION['bookcount']-5];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=0"><?php echo $_SESSION['title'][0];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=1"><?php echo $_SESSION['title'][1];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=2"><?php echo $_SESSION['title'][2];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=3"><?php echo $_SESSION['title'][3];?></a></li>
+							<li><a href="inLib-ViewBook.php?bookID=4"><?php echo $_SESSION['title'][4];?></a></li>
 						</ul>
 					</section>
-				<br><br><br><br><br><br><br><br><br><br>
+				<br><br><br><br><br>
 
 				<!-- Recent Comments -->
 				<!--

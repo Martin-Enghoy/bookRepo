@@ -1738,11 +1738,11 @@ input, select, textarea {
 
 	.image {
 		display: inline-block;
-		height: 300px;
+		height: 50px;
 	}
 
 		.image img {
-			display: block;
+			display: inline;
 			max-width: 100%;
 			max-height: 100%;
 		}
@@ -1770,18 +1770,18 @@ input, select, textarea {
 		}
 
 		.image.left {
-			float: left;
-			margin: 0 2em 2em 0;
+			display: flex
+			margin: 0 2em 0 0;
 		}
 
 		.image.centered {
-			display: block;
-			margin: 0 0 2em 0;
+			display: inline;
+			margin: 0 0 20px 0;
 		}
 
 			.image.centered img {
-				margin: 0 auto;
-				width: auto;
+				margin: 0 0;
+				width: 50px;
 			}
 
 	
